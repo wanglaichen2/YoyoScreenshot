@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{11111111-1111-1111-1111-111111111111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{22222222-2222-2222-2222-222222222222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform">
+      <UniqueIdentifier>{33333333-3333-3333-3333-333333333333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bridge">
+      <UniqueIdentifier>{44444444-4444-4444-4444-444444444444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{55555555-5555-5555-5555-555555555555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK">
+      <UniqueIdentifier>{66666666-6666-6666-6666-666666666666}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="app\main.cpp"><Filter>app</Filter></ClCompile>
+    <ClCompile Include="app\MainWnd.cpp"><Filter>app</Filter></ClCompile>
+    <ClCompile Include="app\stdafx.cpp"><Filter>app</Filter></ClCompile>
+    <ClCompile Include="core\ScreenshotService.cpp"><Filter>core</Filter></ClCompile>
+    <ClCompile Include="core\CaptureOverlay.cpp"><Filter>core</Filter></ClCompile>
+    <ClCompile Include="platform\TrayIcon.cpp"><Filter>platform</Filter></ClCompile>
+    <ClCompile Include="platform\MiniDump.cpp"><Filter>platform</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app\MainWnd.h"><Filter>app</Filter></ClInclude>
+    <ClInclude Include="app\stdafx.h"><Filter>app</Filter></ClInclude>
+    <ClInclude Include="app\targetver.h"><Filter>app</Filter></ClInclude>
+    <ClInclude Include="core\ScreenshotService.h"><Filter>core</Filter></ClInclude>
+    <ClInclude Include="core\CaptureOverlay.h"><Filter>core</Filter></ClInclude>
+    <ClInclude Include="platform\TrayIcon.h"><Filter>platform</Filter></ClInclude>
+    <ClInclude Include="platform\MiniDump.h"><Filter>platform</Filter></ClInclude>
+    <ClInclude Include="bridge\xcgui_client.h"><Filter>bridge</Filter></ClInclude>
+    <ClInclude Include="resources\resource.h"><Filter>resources</Filter></ClInclude>
+    <ClInclude Include="SDK\inc\xcgui.h"><Filter>SDK</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bridge\xcgui_exports.inc"><Filter>bridge</Filter></None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources\YoyoScreenshot.rc"><Filter>resources</Filter></ResourceCompile>
+    <Image Include="resources\icon.ico"><Filter>resources</Filter></Image>
+  </ItemGroup>
+</Project>

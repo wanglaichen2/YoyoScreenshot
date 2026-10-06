@@ -1,0 +1,8 @@
+#pragma code_page(65001)
+#include "resource.h"
+#include <windows.h>
+
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+
+IDI_APP_ICON ICON "icon.ico"
+1 24 "YoyoScreenshot.manifest"

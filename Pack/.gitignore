@@ -1,0 +1,11 @@
+# 安装包输出 / 从 Exec 同步的运行时（可再生成）
+Output/
+msix_layout/
+*.pdb
+*.pfx
+*.cer
+YoyoScreenshot.exe
+YouYouJieTu_Setup.exe
+lib*.dll
+XCGUI.dll
+libXCGUI.dll

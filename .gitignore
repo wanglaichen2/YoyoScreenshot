@@ -1,0 +1,11 @@
+Exec/
+temp/
+dumps/
+shots/
+.vs/
+cmake-build*/
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.vcxproj.user

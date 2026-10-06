@@ -1,0 +1,39 @@
+# 悠悠截图打包目录
+
+## 流程（Inno 安装包）
+
+1. 编译：`./build_vs.sh Release x64` 或 `./build_mingw.sh Release x64`
+2. 打包：本目录运行 `pack.bat`（可选版本号，如 `pack.bat 1.0.0`）
+3. 产物：`Output/YoyoScreenshot_<版本>_x64_Setup.exe`
+
+## 流程（MSIX / 侧载）
+
+1. 同样先编译
+2. 本机需已装 Windows SDK（MakeAppx / SignTool）
+3. 打包：运行 `pack_msix.bat`
+4. 产物：`Output/YouYouJieTu_1.0.0.0_x64.msix`（默认用本地测试证书签名）
+5. 侧载：`Add-AppxPackage -Path Output\YouYouJieTu_1.0.0.0_x64.msix`
+
+上架时把 `msix/AppxManifest.xml` 里 Publisher 改成商店发布者 CN，版本号按四段递增。
+
+本程序以普通用户权限运行，安装无需管理员。
+
+## 文件说明
+
+| 文件 | 作用 |
+|------|------|
+| `YoyoScreenshot.iss` | Inno Setup 脚本 |
+| `pack.bat` | 同步 Exec 后打安装包 |
+| `pack_msix.bat` | 同步 Exec 后打 MSIX |
+| `msix/AppxManifest.xml` | MSIX 清单模板 |
+| `msix/Assets/` | 商店图标 |
+| `YoyoScreenshot.exe` 等 | 由 pack 脚本从 Exec 拷入 |
+
+Inno 依赖 Inno Setup 5/6/7。MSIX 依赖 Windows SDK。
+默认静态链接 UI 库；若改为动态库，把对应 dll 放进本目录即可（脚本已包含拷贝逻辑）。
+
+## GitHub Release
+
+推送 `v1.0.0` 这类 tag 后，`.github/workflows/release.yml` 会自动编译并上传安装包。
+本地也可：`pack.bat 1.0.0`。
+

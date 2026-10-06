@@ -1,0 +1,73 @@
+# 推送 tag v* 后：MSVC Release 编译 → Pack 打安装包 → 发布到 GitHub Release
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "版本号（如 1.0.0，可带 v 前缀）"
+        required: true
+        default: "1.0.0"
+
+permissions:
+  contents: write
+
+jobs:
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: ver
+        shell: pwsh
+        run: |
+          $raw = if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+            "${{ github.event.inputs.version }}"
+          } else {
+            "${{ github.ref_name }}"
+          }
+          $v = $raw.Trim()
+          if ($v.StartsWith("v") -or $v.StartsWith("V")) { $v = $v.Substring(1) }
+          if ($v -notmatch '^\d+(\.\d+){1,3}$') {
+            throw "Invalid version: $raw (expect like 1.0.0)"
+          }
+          "version=$v" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "tag=v$v" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          Write-Host "version=$v"
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+
+      - name: Build Release x64
+        run: msbuild YoyoScreenshot.vcxproj -m -nologo -p:Configuration=Release -p:Platform=x64 -t:Rebuild
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup --no-progress -y
+
+      - name: Pack installer
+        shell: cmd
+        run: pack.bat ${{ steps.ver.outputs.version }}
+        working-directory: Pack
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: YoyoScreenshot_${{ steps.ver.outputs.version }}_x64_Setup
+          path: Pack/Output/YoyoScreenshot_${{ steps.ver.outputs.version }}_x64_Setup.exe
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.ver.outputs.tag }}
+          name: 悠悠截图 ${{ steps.ver.outputs.version }}
+          generate_release_notes: true
+          files: Pack/Output/YoyoScreenshot_${{ steps.ver.outputs.version }}_x64_Setup.exe
