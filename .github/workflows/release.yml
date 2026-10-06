@@ -1,4 +1,5 @@
-# 推送 tag v* 后：MSVC Release 编译 → Pack 打安装包 → 发布到 GitHub Release
+# 推送 tag v* 后：MinGW Release 编译 → Pack 打安装包 → 发布到 GitHub Release
+# CI 不用 MSVC：托管镜像没有 atls.lib（ATL），会 LNK1104。
 name: Release
 
 on:
@@ -18,9 +19,19 @@ permissions:
 jobs:
   windows-installer:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup MinGW
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: false
+          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-binutils make
 
       - name: Resolve version
         id: ver
@@ -40,18 +51,10 @@ jobs:
           "tag=v$v" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           Write-Host "version=$v"
 
-      - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v2
-        with:
-          msbuild-architecture: x64
-
-      - name: Setup MSVC environment
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
-
       - name: Build Release x64
-        run: msbuild YoyoScreenshot.vcxproj -m -nologo -p:Configuration=Release -p:Platform=x64 -t:Rebuild
+        run: |
+          g++ --version
+          make -f Makefile CFG=Release -j4
 
       - name: Install Inno Setup
         shell: pwsh
