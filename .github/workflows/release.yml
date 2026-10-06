@@ -1,5 +1,6 @@
-# 推送 tag v* 后：MinGW Release 编译 → Pack 打安装包 → 发布到 GitHub Release
-# CI 不用 MSVC：托管镜像没有 atls.lib（ATL），会 LNK1104。
+# 推送 tag v* 后：MSVC Release 编译 → Pack 打安装包 → 发布到 GitHub Release
+# 固定 windows-2022：windows-latest 是 VS 2026，没有 atls.lib。
+# 预编译 GUI 静态库是 MSVC 产物，不能用 MinGW 链接。
 name: Release
 
 on:
@@ -18,20 +19,18 @@ permissions:
 
 jobs:
   windows-installer:
-    runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
+    runs-on: windows-2022
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup MinGW
-        uses: msys2/setup-msys2@v2
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
         with:
-          msystem: MINGW64
-          update: false
-          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-binutils make
+          arch: x64
 
       - name: Resolve version
         id: ver
@@ -52,12 +51,13 @@ jobs:
           Write-Host "version=$v"
 
       - name: Build Release x64
+        shell: cmd
         run: |
-          g++ --version
-          make -f Makefile CFG=Release -j4
+          echo VCToolsInstallDir=%VCToolsInstallDir%
+          dir /b "%VCToolsInstallDir%atlmfc\lib\x64\atls.lib"
+          msbuild YoyoScreenshot.vcxproj -m -nologo -p:Configuration=Release -p:Platform=x64 -t:Rebuild
 
       - name: Install Inno Setup
-        shell: pwsh
         run: choco install innosetup --no-progress -y
 
       - name: Pack installer
