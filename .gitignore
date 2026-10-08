@@ -9,3 +9,31 @@ cmake-build*/
 *.sdf
 *.opensdf
 *.vcxproj.user
+
+# 打包产物与中间目录
+Pack/Output/
+Pack/msix_layout/
+Pack/*.exe
+Pack/*.dll
+*.msix
+*.appx
+*.pfx
+
+# 商店审核临时材料 / 本地截图
+Store/cert-report/
+Store/*.png
+Store/*.jpg
+Store/*.jpeg
+Store/*.webp
+
+# 图标原稿（保留脚本生成的正式 PNG；忽略中间稿）
+Store/Logos/*_master.jpg
+Store/Logos/*_master.jpeg
+Store/Logos/StoreLogo_720x1080_master.jpg
+
+# Git / 编辑器临时
+.git/COMMITMSG.txt
+*.tmp
+*~
+Thumbs.db
+Desktop.ini

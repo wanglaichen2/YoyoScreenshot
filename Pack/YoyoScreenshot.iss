@@ -15,7 +15,7 @@
 #define MyAppName      "YoyoScreenshot"
 #endif
 #define MyAppNameCn    "悠悠截图"
-#define MyAppPublisher "PinZhun"
+#define MyAppPublisher "海边知心人"
 #define MyAppExeName   "YoyoScreenshot.exe"
 
 [Setup]
