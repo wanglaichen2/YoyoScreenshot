@@ -65,7 +65,7 @@ exit /b 2
 echo       ISCC=%ISCC%
 
 set "APP_VER=%~1"
-if "%APP_VER%"=="" set "APP_VER=1.0.0"
+if "%APP_VER%"=="" set "APP_VER=1.0.4"
 if /I "%APP_VER:~0,1%"=="v" set "APP_VER=%APP_VER:~1%"
 
 echo [3/3] Compile YoyoScreenshot.iss (version %APP_VER%) ...

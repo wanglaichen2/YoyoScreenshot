@@ -12,7 +12,7 @@ on:
       version:
         description: "版本号（如 1.0.0，可带 v 前缀）"
         required: true
-        default: "1.0.0"
+        default: "1.0.4"
 
 permissions:
   contents: write

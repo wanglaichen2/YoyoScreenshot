@@ -48,12 +48,12 @@ MinGW（CMake；没有 cmake 时走 `Makefile`）：
 推送版本 tag 后，Actions 会编译并上传 `Pack` 打出的安装包：
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.0.4
+git push origin v1.0.4
 ```
 
 也可在 Actions 里手动跑 **Release** 工作流，填写版本号。
 
-Release 附件：`YoyoScreenshot_<版本>_x64_Setup.exe`（例如 `YoyoScreenshot_1.0.0_x64_Setup.exe`）。
+Release 附件：`YoyoScreenshot_<版本>_x64_Setup.exe`（例如 `YoyoScreenshot_1.0.4_x64_Setup.exe`）。
 
-本地打包：先编译，再 `Pack\pack.bat 1.0.0`。
+本地打包：先编译，再 `Pack\pack.bat 1.0.4`。

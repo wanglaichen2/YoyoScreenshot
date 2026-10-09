@@ -267,7 +267,7 @@ void CMainWnd::ShowAbout()
 	HWND hwnd = XWnd_GetHWnd(m_hWindow);
 	MessageBoxW(hwnd,
 		L"悠悠截图\n"
-		L"版本: 1.0.0\n"
+		L"版本: 1.0.4\n"
 		L"语言: C++",
 		L"关于",
 		MB_OK | MB_ICONINFORMATION);

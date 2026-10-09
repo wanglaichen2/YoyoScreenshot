@@ -9,7 +9,7 @@
 ; 版本可在命令行覆盖: ISCC.exe /DMyAppVersion=1.2.3 YoyoScreenshot.iss
 
 #ifndef MyAppVersion
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.4"
 #endif
 #ifndef MyAppName
 #define MyAppName      "YoyoScreenshot"
