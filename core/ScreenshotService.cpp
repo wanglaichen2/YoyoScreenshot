@@ -5,9 +5,71 @@
 #include <string>
 #include <algorithm>
 #include <commdlg.h>
+#include <appmodel.h>
+#include <shlobj.h>
+#include "../platform/Lang.h"
 
 namespace spy
 {
+namespace
+{
+bool IsRunningPackaged()
+{
+	UINT32 length = 0;
+	const LONG rc = GetCurrentPackageFullName(&length, nullptr);
+	// 未打包返回 APPMODEL_ERROR_NO_PACKAGE；已打包会要求缓冲区（ERROR_INSUFFICIENT_BUFFER）
+	return rc != APPMODEL_ERROR_NO_PACKAGE;
+}
+
+std::wstring GetExeShotsDirectory()
+{
+	wchar_t dir[MAX_PATH] = {0};
+	GetModuleFileNameW(NULL, dir, MAX_PATH);
+	wchar_t* slash = wcsrchr(dir, L'\\');
+	if (slash) *slash = 0;
+	std::wstring shots = std::wstring(dir) + L"\\shots";
+	CreateDirectoryW(shots.c_str(), NULL);
+	return shots;
+}
+
+std::wstring GetStoreShotsDirectory()
+{
+	PWSTR docs = nullptr;
+	if (FAILED(SHGetKnownFolderPath(FOLDERID_Documents, KF_FLAG_DEFAULT, NULL, &docs)) || !docs)
+	{
+		return GetExeShotsDirectory();
+	}
+	// Fixed English path (not localized).
+	const std::wstring docsRoot = docs;
+	CoTaskMemFree(docs);
+	const std::wstring shots = docsRoot + L"\\YouYouJieTu\\shots";
+	SHCreateDirectoryExW(NULL, shots.c_str(), NULL);
+
+	// Migrate from pre-1.0.5 folder name if new dir is empty.
+	// Historical path was Documents\<app>\shots (Unicode escapes; not UI text).
+	const std::wstring legacy = docsRoot + L"\\\u60a0\u60a0\u622a\u56fe\\shots";
+	WIN32_FIND_DATAW fd = {};
+	HANDLE hNew = FindFirstFileW((shots + L"\\*.bmp").c_str(), &fd);
+	const bool newEmpty = (hNew == INVALID_HANDLE_VALUE);
+	if (hNew != INVALID_HANDLE_VALUE) FindClose(hNew);
+	if (newEmpty)
+	{
+		HANDLE hOld = FindFirstFileW((legacy + L"\\*.bmp").c_str(), &fd);
+		if (hOld != INVALID_HANDLE_VALUE)
+		{
+			do
+			{
+				if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
+				const std::wstring src = legacy + L"\\" + fd.cFileName;
+				const std::wstring dst = shots + L"\\" + fd.cFileName;
+				MoveFileExW(src.c_str(), dst.c_str(), MOVEFILE_REPLACE_EXISTING);
+			} while (FindNextFileW(hOld, &fd));
+			FindClose(hOld);
+		}
+	}
+	return shots;
+}
+}
 
 bool SaveHBitmapToBmpFile(HBITMAP hBitmap, const std::wstring& path)
 {
@@ -54,13 +116,12 @@ bool SaveHBitmapToBmpFile(HBITMAP hBitmap, const std::wstring& path)
 
 std::wstring GetShotsDirectory()
 {
-	wchar_t dir[MAX_PATH] = {0};
-	GetModuleFileNameW(NULL, dir, MAX_PATH);
-	wchar_t* slash = wcsrchr(dir, L'\\');
-	if (slash) *slash = 0;
-	std::wstring shots = std::wstring(dir) + L"\\shots";
-	CreateDirectoryW(shots.c_str(), NULL);
-	return shots;
+	// Store/MSIX: writable Documents\YouYouJieTu\shots; unpackaged: exe\shots
+	if (IsRunningPackaged())
+	{
+		return GetStoreShotsDirectory();
+	}
+	return GetExeShotsDirectory();
 }
 
 std::wstring MakeDefaultShotPath()
@@ -178,7 +239,7 @@ std::wstring DateKeyFromShotPath(const std::wstring& path)
 			(unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay);
 		return key;
 	}
-	return L"未知日期";
+	return L"Unknown date";
 }
 }
 
@@ -293,7 +354,7 @@ bool SaveShotAsDialog(HWND owner, const std::wstring& srcPath)
 	OPENFILENAMEW ofn = {};
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = owner;
-	ofn.lpstrFilter = L"BMP 图片\0*.bmp\0所有文件\0*.*\0";
+	ofn.lpstrFilter = L"BMP Image\0*.bmp\0All Files\0*.*\0";
 	ofn.lpstrFile = file;
 	ofn.nMaxFile = MAX_PATH;
 	ofn.Flags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
@@ -444,7 +505,7 @@ void ShowPinnedShot(const std::wstring& bmpPath)
 	HWND hwnd = CreateWindowExW(
 		WS_EX_TOPMOST | WS_EX_TOOLWINDOW,
 		L"YoyoPinnedShot",
-		L"贴图",
+		Tr(L"CtxPin"),
 		WS_POPUP | WS_VISIBLE | WS_BORDER,
 		x, y, showW, showH,
 		NULL, NULL, GetModuleHandle(NULL), st);

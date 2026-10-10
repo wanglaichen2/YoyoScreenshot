@@ -85,8 +85,10 @@
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutDir)resources" mkdir "$(OutDir)resources"
+if not exist "$(OutDir)Lang" mkdir "$(OutDir)Lang"
 copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)icon.ico"
-copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)resources\icon.ico"</Command>
+copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)resources\icon.ico"
+xcopy /Y /Q /I "$(ProjectDir)Lang\*.lng" "$(OutDir)Lang\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -117,8 +119,10 @@ copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)resources\icon.ico"</Command
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutDir)resources" mkdir "$(OutDir)resources"
+if not exist "$(OutDir)Lang" mkdir "$(OutDir)Lang"
 copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)icon.ico"
-copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)resources\icon.ico"</Command>
+copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)resources\icon.ico"
+xcopy /Y /Q /I "$(ProjectDir)Lang\*.lng" "$(OutDir)Lang\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 
@@ -140,6 +144,12 @@ copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)resources\icon.ico"</Command
     <ClCompile Include="platform\MiniDump.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="platform\Lang.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="platform\SettingsDlg.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MainWnd.h" />
@@ -149,6 +159,8 @@ copy /Y "$(ProjectDir)resources\icon.ico" "$(OutDir)resources\icon.ico"</Command
     <ClInclude Include="core\CaptureOverlay.h" />
     <ClInclude Include="platform\TrayIcon.h" />
     <ClInclude Include="platform\MiniDump.h" />
+    <ClInclude Include="platform\Lang.h" />
+    <ClInclude Include="platform\SettingsDlg.h" />
     <ClInclude Include="bridge\xcgui_client.h" />
     <ClInclude Include="resources\resource.h" />
     <ClInclude Include="SDK\inc\xcgui.h" />

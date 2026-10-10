@@ -1,0 +1,60 @@
+Yoyo Screenshot — Microsoft Store-teksten
+Versie: 1.0.4
+Uitgever: 海边知心人
+
+
+============================================================
+1. Beschrijving
+============================================================
+
+Yoyo Screenshot is een lichtgewicht, gebruiksvriendelijke screenshottool voor Windows. Het ondersteunt gebieds- en volledigschermopnamen, laat u annoteren tijdens het vastleggen (pen, rechthoek, pijl, enz.) en biedt geschiedenisbeheer met miniaturen: voorbeeld, kopiëren, vastzetten en verwijderen. De app kan in het systeemvak blijven; het sluiten van het venster beëindigt de app niet—u kunt altijd vastleggen met sneltoetsen.
+
+Ideaal voor kantoor, lesdemo’s, bugrapporten en het delen van afbeeldingen in chat. Screenshots worden lokaal opgeslagen—geen account nodig. Direct klaar voor gebruik.
+
+
+============================================================
+2. Nieuw in deze versie
+============================================================
+
+1.0.4:
+- Uniforme versienummers voor GitHub Release / installer / MSIX
+- MSIX-verpakking met vierdelige versie via opdrachtregel
+- Verpakkingsflow gecorrigeerd bij naam-/versieconflicten in de Store
+
+1.0.1:
+- Store-pakketversie en pictogrambronnen bijgewerkt
+- Versieconflict Store-pakket opgelost (zelfde naam 1.0.0.0 met inconsistente inhoud)
+
+1.0.0 eerste officiële Store-release bevat:
+- Gebieds- en volledigschermopname
+- Annotatie: pen / rechthoek / pijl, enz.
+- Geschiedenisminiaturen: selecteren, dubbelklikken om te bewerken, rechtsklikken voor voorbeeld / kopiëren / vastzetten / verwijderen
+- Systeemvak-residentie; venster sluiten minimaliseert naar het vak
+- Sneltoetsen: Ctrl+Alt+I gebied; Ctrl+Alt+Shift+I volledig scherm
+- Opslaan in lokale map shots
+
+
+============================================================
+3. Productfuncties
+============================================================
+
+- Gebiedsopname: sleep om een willekeurig schermgebied te selecteren
+- Volledigschermopname: huidige scherm met één klik vastleggen
+- Annotatietools: pen, rechthoek, pijl, enz.—annoteren tijdens vastleggen
+- Opnieuw bewerken: bestaande screenshots opnieuw openen, annoteren en opslaan
+- Geschiedenis: miniatuurlijst met voorbeeld, klembord, vastzetten en verwijderen
+- Systeemvak: op de achtergrond, altijd beschikbaar
+- Globale sneltoetsen: Ctrl+Alt+I / Ctrl+Alt+Shift+I
+- Lokale opslag: bestanden in de map shots onder de app-map; gegevens blijven op het apparaat
+- Lichte installatie: MSIX voor Windows 10/11-desktop (x64)
+
+
+============================================================
+Tips voor Partner Center
+============================================================
+
+- App-naam: Yoyo Screenshot / 悠悠截图
+- Weergavenaam uitgever: 海边知心人
+- Apparaatfamilie: Windows.Desktop aanvinken
+- Privacybeleid: openbare HTTPS-URL met geldig certificaat vereist
+- Logo’s: PNG’s in de map Logos (aanbevolen: StoreLogo_300x300.png)

@@ -1,0 +1,32 @@
+Yoyo Screenshot Privacy Policy
+
+Effective date: October 8, 2026
+Publisher: 海边知心人
+
+This policy explains how “Yoyo Screenshot” handles information related to your use of this app.
+
+1. What information we collect
+This app is a local screenshot tool installed on your device. We do not collect, upload, or transmit to any server your personal identity information, account details, contact information, or location data through this app, and we do not perform ad tracking or behavioral analytics.
+
+Content that may be processed locally by this app is limited to:
+1. Screen images and annotations created when you take a screenshot;
+2. Screenshot data when you choose to copy it to the clipboard;
+3. Crash diagnostic information that may be generated locally if the app exits abnormally (if any), to help keep the app stable.
+
+2. How information is used and stored
+Screenshots and related files are saved by default in a local folder under the app install directory (such as shots), for you to view, edit, copy, delete, or export. This data stays on your device and does not pass through our servers.
+
+3. Information sharing
+We do not sell, rent, or share your screenshots or the local data described above with third parties. If you paste, send, or upload screenshots to other software or websites yourself, that is governed by the privacy policies of those services.
+
+4. Permissions
+To provide screenshot, tray notification, and global hotkey features, this app may need access to screen content, the file system, and the clipboard. These capabilities are used only for local functionality and not for remote data collection.
+
+5. Children’s privacy
+This app is intended for general users. It is not directed at children and does not knowingly collect children’s personal information.
+
+6. Policy updates
+If this policy is updated, we will post the updated content on the Store product page or in an appropriate place within the app. Continued use means you acknowledge the updated policy.
+
+7. Contact us
+If you have questions about this privacy policy, please contact the publisher “海边知心人” via the support contact information on the Microsoft Store product page.

@@ -1,0 +1,32 @@
+Privacybeleid van Yoyo Screenshot
+
+Ingangsdatum: 8 oktober 2026
+Uitgever: 海边知心人
+
+Dit beleid legt uit hoe «Yoyo Screenshot» omgaat met informatie die verband houdt met uw gebruik van deze app.
+
+1. Welke informatie we verzamelen
+Deze app is een lokale screenshottool die op uw apparaat is geïnstalleerd. We verzamelen, uploaden of verzenden via deze app geen persoonlijke identiteitsgegevens, account-, contact- of locatiegegevens naar een server, en we voeren geen advertentietracking of gedragsanalyse uit.
+
+Inhoud die lokaal kan worden verwerkt, beperkt zich tot:
+1. Schermbeelden en annotaties die u maakt bij een screenshot;
+2. Screenshotgegevens wanneer u deze naar het klembord kopieert;
+3. Eventuele lokale crashdiagnostiek bij abnormale afsluiting, voor stabiliteit.
+
+2. Gebruik en opslag
+Screenshots en gerelateerde bestanden worden standaard opgeslagen in een lokale map onder de installatiemap (bijv. shots), zodat u ze kunt bekijken, bewerken, kopiëren, verwijderen of exporteren. Deze gegevens blijven op uw apparaat en gaan niet via onze servers.
+
+3. Delen
+We verkopen, verhuren of delen uw screenshots of de genoemde lokale gegevens niet met derden. Als u zelf screenshots plakt, verzendt of uploadt naar andere software/websites, gelden de privacybeleidsregels van die diensten.
+
+4. Machtigingen
+Voor screenshots, systeemvakmeldingen en globale sneltoetsen kan de app toegang nodig hebben tot scherminhoud, bestandssysteem en klembord. Deze mogelijkheden dienen alleen lokale functies, niet voor externe gegevensverzameling.
+
+5. Privacy van kinderen
+De app is bedoeld voor algemene gebruikers, niet specifiek voor kinderen, en verzamelt niet bewust persoonsgegevens van kinderen.
+
+6. Beleidsupdates
+Bij updates publiceren we de nieuwe inhoud op de Store-productpagina of op een geschikte plek in de app. Voortgezet gebruik betekent dat u kennis neemt van het bijgewerkte beleid.
+
+7. Contact
+Vragen over dit privacybeleid? Neem contact op met uitgever «海边知心人» via de supportcontactgegevens op de Microsoft Store-productpagina.

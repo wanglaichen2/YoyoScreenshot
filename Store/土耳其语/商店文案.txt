@@ -1,0 +1,60 @@
+Yoyo Screenshot — Microsoft Store metinleri
+Sürüm: 1.0.4
+Yayımcı: 海边知心人
+
+
+============================================================
+1. Açıklama
+============================================================
+
+Yoyo Screenshot, Windows için hafif ve kullanımı kolay bir ekran görüntüsü aracıdır. Bölge ve tam ekran yakalamayı destekler, yakalama sırasında not eklemenize olanak tanır (kalem, dikdörtgen, ok vb.) ve geçmiş küçük resim yönetimi sunar: önizleme, kopyalama, sabitleme ve silme. Uygulama sistem tepsisinde kalabilir; pencereyi kapatmak uygulamayı sonlandırmaz—kısayollarla istediğiniz zaman yakalayabilirsiniz.
+
+Ofis, öğretim demoları, hata bildirimi ve sohbette görüntü paylaşma için idealdir. Ekran görüntüleri yerel olarak kaydedilir—hesap girişi gerekmez. Hemen kullanıma hazırdır.
+
+
+============================================================
+2. Bu sürümdeki yenilikler
+============================================================
+
+1.0.4:
+- GitHub Release / yükleyici / MSIX sürüm numaraları birleştirildi
+- MSIX paketlemede komut satırından dört parçalı sürüm desteği
+- Store paketi ad/sürüm çakışmalarıyla ilgili paketleme akışı düzeltildi
+
+1.0.1:
+- Store paketi sürümü ve simge kaynakları güncellendi
+- Store paketi sürüm çakışması düzeltildi (aynı ad 1.0.0.0 tutarsız içerik)
+
+1.0.0 ilk resmi Store sürümü şunları içerir:
+- Bölge ve tam ekran yakalama
+- Not ekleme: kalem / dikdörtgen / ok vb.
+- Geçmiş küçük resimleri: seç, çift tıkla düzenle, sağ tık önizle / kopyala / sabitle / sil
+- Sistem tepsisinde kalma; pencereyi kapatmak tepsiye küçültür
+- Kısayollar: Ctrl+Alt+I bölge; Ctrl+Alt+Shift+I tam ekran
+- Yerel shots klasörüne kaydetme
+
+
+============================================================
+3. Ürün özellikleri
+============================================================
+
+- Bölge yakalama: herhangi bir ekran alanını sürükleyerek seçin
+- Tam ekran yakalama: mevcut ekranı tek tıkla yakalayın
+- Not araçları: kalem, dikdörtgen, ok vb.—yakalama sırasında not ekleyin
+- Yeniden düzenleme: mevcut ekran görüntülerini açıp not ekleyip kaydedin
+- Geçmiş: önizleme, panoya kopyalama, sabitleme ve silme ile küçük resim listesi
+- Tepsi: arka planda, her an kullanılabilir
+- Genel kısayollar: Ctrl+Alt+I / Ctrl+Alt+Shift+I
+- Yerel depolama: dosyalar uygulama dizinindeki shots klasörüne yazılır; veriler cihazda kalır
+- Hafif kurulum: Windows 10/11 masaüstü (x64) için MSIX
+
+
+============================================================
+Partner Center ipuçları
+============================================================
+
+- Uygulama adı: Yoyo Screenshot / 悠悠截图
+- Yayımcı görünen adı: 海边知心人
+- Cihaz ailesi: Windows.Desktop’u işaretleyin
+- Gizlilik politikası: geçerli sertifikalı herkese açık HTTPS URL gerekli
+- Logolar: Logos klasöründeki PNG’ler (önerilen: StoreLogo_300x300.png)

@@ -1,0 +1,32 @@
+Politique de confidentialité de Yoyo Screenshot
+
+Date d’effet : 8 octobre 2026
+Éditeur : 海边知心人
+
+Cette politique explique comment « Yoyo Screenshot » traite les informations liées à votre utilisation de cette application.
+
+1. Quelles informations nous collectons
+Cette application est un outil de capture d’écran local installé sur votre appareil. Nous ne collectons, n’envoyons ni ne transmettons via cette application vos informations d’identité personnelle, compte, coordonnées ou localisation vers un serveur, et nous ne pratiquons ni suivi publicitaire ni analyse comportementale.
+
+Le contenu pouvant être traité localement se limite à :
+1. les images d’écran et annotations créées lorsque vous capturez ;
+2. les données de capture lorsque vous les copiez dans le Presse-papiers ;
+3. éventuellement des informations de diagnostic de plantage générées localement en cas de sortie anormale, pour la stabilité.
+
+2. Utilisation et stockage
+Les captures et fichiers associés sont enregistrés par défaut dans un dossier local sous le répertoire d’installation (ex. shots), pour que vous puissiez les consulter, modifier, copier, supprimer ou exporter. Ces données restent sur votre appareil et ne transitent pas par nos serveurs.
+
+3. Partage
+Nous ne vendons, ne louons ni ne partageons vos captures ou les données locales ci-dessus avec des tiers. Si vous collez, envoyez ou téléversez des captures vers d’autres logiciels/sites, les politiques de confidentialité de ces services s’appliquent.
+
+4. Autorisations
+Pour la capture, les notifications de barre système et les raccourcis globaux, l’application peut accéder au contenu de l’écran, au système de fichiers et au Presse-papiers. Ces capacités servent uniquement aux fonctions locales, pas à la collecte à distance.
+
+5. Confidentialité des enfants
+L’application s’adresse au grand public, n’est pas destinée aux enfants et ne collecte pas sciemment d’informations personnelles d’enfants.
+
+6. Mises à jour de la politique
+En cas de mise à jour, le contenu sera publié sur la page produit du Store ou à un emplacement approprié dans l’application. L’utilisation continue vaut prise de connaissance de la politique mise à jour.
+
+7. Nous contacter
+Pour toute question sur cette politique, contactez l’éditeur « 海边知心人 » via les informations de support de la page produit Microsoft Store.

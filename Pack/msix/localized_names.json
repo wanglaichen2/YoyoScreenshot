@@ -1,0 +1,89 @@
+{
+  "defaultLanguage": "zh-CN",
+  "languages": {
+    "zh-CN": {
+      "displayName": "悠悠截图",
+      "description": "悠悠截图 — 区域/全屏截图工具"
+    },
+    "zh-TW": {
+      "displayName": "悠悠截圖",
+      "description": "悠悠截圖 — 區域/全螢幕截圖工具"
+    },
+    "en-US": {
+      "displayName": "Yoyo Screenshot",
+      "description": "Yoyo Screenshot — region and full-screen capture"
+    },
+    "de-DE": {
+      "displayName": "Yoyo Screenshot",
+      "description": "Yoyo Screenshot — Bereichs- und Vollbildaufnahme"
+    },
+    "fr-FR": {
+      "displayName": "Yoyo Capture",
+      "description": "Yoyo Capture — capture de zone et plein écran"
+    },
+    "es-ES": {
+      "displayName": "Yoyo Captura",
+      "description": "Yoyo Captura — captura de región y pantalla completa"
+    },
+    "it-IT": {
+      "displayName": "Yoyo Screenshot",
+      "description": "Yoyo Screenshot — cattura area e schermo intero"
+    },
+    "ja-JP": {
+      "displayName": "悠悠スクリーンショット",
+      "description": "悠悠スクリーンショット — 範囲選択と全画面キャプチャ"
+    },
+    "ko-KR": {
+      "displayName": "유유 스크린샷",
+      "description": "유유 스크린샷 — 영역 및 전체 화면 캡처"
+    },
+    "ru-RU": {
+      "displayName": "Yoyo Скриншот",
+      "description": "Yoyo Скриншот — захват области и всего экрана"
+    },
+    "pt-BR": {
+      "displayName": "Yoyo Captura",
+      "description": "Yoyo Captura — captura de região e tela cheia"
+    },
+    "nl-NL": {
+      "displayName": "Yoyo Screenshot",
+      "description": "Yoyo Screenshot — gebieds- en volledigschermopname"
+    },
+    "pl-PL": {
+      "displayName": "Yoyo Zrzut ekranu",
+      "description": "Yoyo Zrzut ekranu — zrzut obszaru i pełnego ekranu"
+    },
+    "ro-RO": {
+      "displayName": "Yoyo Captură",
+      "description": "Yoyo Captură — captură de regiune și ecran complet"
+    },
+    "tr-TR": {
+      "displayName": "Yoyo Ekran Görüntüsü",
+      "description": "Yoyo Ekran Görüntüsü — bölge ve tam ekran yakalama"
+    },
+    "vi-VN": {
+      "displayName": "Chụp màn hình Yoyo",
+      "description": "Chụp màn hình Yoyo — chụp vùng và toàn màn hình"
+    },
+    "th-TH": {
+      "displayName": "Yoyo แคปหน้าจอ",
+      "description": "Yoyo แคปหน้าจอ — จับภาพพื้นที่และเต็มจอ"
+    },
+    "az-AZ": {
+      "displayName": "Yoyo Ekran Görüntüsü",
+      "description": "Yoyo Ekran Görüntüsü — sahə və tam ekran çəkilişi"
+    },
+    "ka-GE": {
+      "displayName": "Yoyo სქრინშოტი",
+      "description": "Yoyo სქრინშოტი — არეალისა და სრული ეკრანის აღება"
+    },
+    "mn-MN": {
+      "displayName": "Yoyo дэлгэцийн зураг",
+      "description": "Yoyo дэлгэцийн зураг — бүс болон бүтэн дэлгэц авах"
+    },
+    "my-MM": {
+      "displayName": "Yoyo မျက်နှာပြင်ပုံ",
+      "description": "Yoyo မျက်နှာပြင်ပုံ — နယ်ပယ်နှင့် မျက်နှာပြင်အပြည့် ဖမ်းယူ"
+    }
+  }
+}

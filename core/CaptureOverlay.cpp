@@ -1,5 +1,6 @@
 #include "CaptureOverlay.h"
 #include "ScreenshotService.h"
+#include "../platform/Lang.h"
 
 #include <vector>
 #include <string>
@@ -392,7 +393,7 @@ void DrawAnnotation(HDC hdc, const Annotation& a)
 			DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
 			CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Microsoft YaHei UI");
 		HGDIOBJ of = SelectObject(hdc, font);
-		const wchar_t* t = a.text.empty() ? L"文字" : a.text.c_str();
+		const wchar_t* t = a.text.empty() ? L"Text" : a.text.c_str();
 		TextOutW(hdc, a.a.x, a.a.y, t, (int)wcslen(t));
 		SelectObject(hdc, of);
 		DeleteObject(font);
@@ -757,7 +758,7 @@ void PaintPixelHud(HWND hwnd)
 
 	int ty = magB + 10;
 	wchar_t line[96] = {};
-	_snwprintf_s(line, _TRUNCATE, L"坐标: %d, %d",
+	_snwprintf_s(line, _TRUNCATE, spy::Tr(L"PixelCoord"),
 		g_ov->screenX + cx, g_ov->screenY + cy);
 	TextOutW(mem, magL, ty, line, (int)wcslen(line));
 	ty += 20;
@@ -772,9 +773,9 @@ void PaintPixelHud(HWND hwnd)
 	TextOutW(mem, magL + 20, ty, colorText.c_str(), (int)colorText.size());
 	ty += 22;
 
-	TextOutW(mem, magL, ty, L"按 Q 复制颜色值", (int)wcslen(L"按 Q 复制颜色值"));
+	TextOutW(mem, magL, ty, spy::Tr(L"PixelCopyHint"), (int)wcslen(spy::Tr(L"PixelCopyHint")));
 	ty += 18;
-	TextOutW(mem, magL, ty, L"按 Shift 切换RGB/HEX", (int)wcslen(L"按 Shift 切换RGB/HEX"));
+	TextOutW(mem, magL, ty, spy::Tr(L"PixelShiftHint"), (int)wcslen(spy::Tr(L"PixelShiftHint")));
 
 	SelectObject(mem, of);
 	DeleteObject(font);
@@ -968,7 +969,7 @@ bool PromptAnnotationText(HWND owner, std::wstring& out)
 		pt.x, pt.y, ew, eh, owner, NULL, GetModuleHandle(NULL), NULL);
 	if (!edit)
 	{
-		out = L"文字";
+		out = L"Text";
 		return true;
 	}
 	HFONT font = CreateFontW(18, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
@@ -1017,7 +1018,7 @@ bool PromptAnnotationText(HWND owner, std::wstring& out)
 		out = buf;
 		if (out.empty())
 		{
-			out = L"文字";
+			out = L"Text";
 		}
 	}
 	DestroyWindow(edit);
@@ -1189,7 +1190,7 @@ void PaintEditBtnIcon(HDC hdc, const RECT& rc, int id, COLORREF ink)
 		HFONT f = CreateFontW(11, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
 			DEFAULT_CHARSET, 0, 0, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Microsoft YaHei UI");
 		HGDIOBJ of = SelectObject(hdc, f);
-		TextOutW(hdc, cx - 10, cy - 8, L"中A", 2);
+		TextOutW(hdc, cx - 10, cy - 8, L"Aa", 2);
 		SelectObject(hdc, of);
 		DeleteObject(f);
 		break;
@@ -1356,7 +1357,7 @@ void OnEditCommand(int id)
 	case kBtnNote:
 	case kBtnScissors:
 	case kBtnImage:
-		MessageBoxW(g_ov->hwnd, L"该功能后续版本开放", L"截图编辑", MB_OK | MB_ICONINFORMATION);
+		MessageBoxW(g_ov->hwnd, spy::Tr(L"OverlayComingSoon"), spy::Tr(L"OverlayEditTitle"), MB_OK | MB_ICONINFORMATION);
 		break;
 	case kBtnPin:
 		if (SaveSelection())

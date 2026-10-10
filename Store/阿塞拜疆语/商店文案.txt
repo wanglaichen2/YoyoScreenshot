@@ -1,0 +1,60 @@
+Yoyo Screenshot — Microsoft Store mətnləri
+Versiya: 1.0.4
+Nəşriyyatçı: 海边知心人
+
+
+============================================================
+1. Təsvir
+============================================================
+
+Yoyo Screenshot Windows üçün yüngül və istifadəsi asan ekran görüntüsü alətidir. Bölgə və tam ekran çəkilişini dəstəkləyir, çəkiliş zamanı annotasiya etməyə imkan verir (qələm, düzbucaqlı, ox və s.) və tarixçə miniatürlərinin idarəsini təklif edir: önbaxış, kopyalama, sabitləmə və silmə. Tətbiq sistem tray-də qala bilər; pəncərəni bağlamaq tətbiqi dayandırmır—qısayollarla istənilən vaxt çəkə bilərsiniz.
+
+Ofis, tədris nümayişləri, səhv hesabatları və söhbətdə şəkil paylaşımı üçün idealdır. Ekran görüntüləri yerli saxlanılır—hesab girişi tələb olunmur. Dərhal istifadəyə hazırdır.
+
+
+============================================================
+2. Bu versiyadakı yeniliklər
+============================================================
+
+1.0.4:
+- GitHub Release / quraşdırıcı / MSIX versiya nömrələri unifikasiya edildi
+- MSIX paketlənəməsi komanda sətrindən dörd hissəli versiya dəstəyi
+- Store paketi ad/versiya konfliktləri ilə bağlı paketləmə axını düzəldildi
+
+1.0.1:
+- Store paketi versiyası və ikon resursları yeniləndi
+- Store paketi versiya konflikti düzəldildi (eyni ad 1.0.0.0 uyğunsuz məzmun)
+
+1.0.0 ilk rəsmi Store buraxılışına daxildir:
+- Bölgə və tam ekran çəkilişi
+- Annotasiya: qələm / düzbucaqlı / ox və s.
+- Tarixçə miniatürləri: seç, cüt kliklə redaktə et, sağ kliklə önbaxış / kopyala / sabitlə / sil
+- Sistem tray-də qalma; pəncərəni bağlamaq tray-ə kiçildir
+- Qısayollar: Ctrl+Alt+I bölgə; Ctrl+Alt+Shift+I tam ekran
+- Yerli shots qovluğuna saxlama
+
+
+============================================================
+3. Məhsul xüsusiyyətləri
+============================================================
+
+- Bölgə çəkilişi: istənilən ekran sahəsini sürükləyərək seçin
+- Tam ekran çəkilişi: cari ekranı bir kliklə çəkin
+- Annotasiya alətləri: qələm, düzbucaqlı, ox və s.—çəkiliş zamanı annotasiya edin
+- Yenidən redaktə: mövcud ekran görüntülərini açıb annotasiya edib saxlayın
+- Tarixçə: önbaxış, bufer, sabitləmə və silmə ilə miniatür siyahısı
+- Tray: arxa planda, istənilən vaxt əlçatan
+- Qlobal qısayollar: Ctrl+Alt+I / Ctrl+Alt+Shift+I
+- Yerli saxlama: fayllar tətbiq kataloqundakı shots qovluğuna yazılır; məlumat cihazda qalır
+- Yüngül quraşdırma: Windows 10/11 masaüstü (x64) üçün MSIX
+
+
+============================================================
+Partner Center məsləhətləri
+============================================================
+
+- Tətbiq adı: Yoyo Screenshot / 悠悠截图
+- Nəşriyyatçı göstərilən adı: 海边知心人
+- Cihaz ailəsi: Windows.Desktop seçin
+- Məxfilik siyasəti: etibarlı sertifikatlı ictimai HTTPS URL tələb olunur
+- Loqotiplər: Logos qovluğundakı PNG-lər (tövsiyə: StoreLogo_300x300.png)

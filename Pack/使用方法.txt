@@ -9,12 +9,13 @@
 ## 流程（MSIX / 侧载）
 
 1. 同样先编译
-2. 本机需已装 Windows SDK（MakeAppx / SignTool）
-3. 打包：运行 `pack_msix.bat`
+2. 本机需已装 Windows SDK（MakeAppx / MakePri / SignTool）
+3. 打包：运行 `pack_msix.bat`（会按 `msix/localized_names.json` 生成多语言开始菜单名）
 4. 产物：`Output/YouYouJieTu_1.0.0.0_x64.msix`（默认用本地测试证书签名）
 5. 侧载：`Add-AppxPackage -Path Output\YouYouJieTu_1.0.0.0_x64.msix`
 
 上架时把 `msix/AppxManifest.xml` 里 Publisher 改成商店发布者 CN，版本号按四段递增。
+开始菜单显示名随 Windows 显示语言切换；商店产品页名称仍须在 Partner Center 各语言列表中单独设置。
 
 本程序以普通用户权限运行，安装无需管理员。
 
@@ -25,7 +26,9 @@
 | `YoyoScreenshot.iss` | Inno Setup 脚本 |
 | `pack.bat` | 同步 Exec 后打安装包 |
 | `pack_msix.bat` | 同步 Exec 后打 MSIX |
-| `msix/AppxManifest.xml` | MSIX 清单模板 |
+| `msix/AppxManifest.xml` | MSIX 清单模板（DisplayName 用 ms-resource） |
+| `msix/localized_names.json` | 各语言开始菜单/磁贴显示名 |
+| `msix/gen_localized_strings.ps1` | 生成 Strings\\*\\Resources.resw |
 | `msix/Assets/` | 商店图标 |
 | `YoyoScreenshot.exe` 等 | 由 pack 脚本从 Exec 拷入 |
 

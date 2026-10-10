@@ -1,0 +1,32 @@
+Polityka prywatności Yoyo Screenshot
+
+Data wejścia w życie: 8 października 2026
+Wydawca: 海边知心人
+
+Niniejsza polityka wyjaśnia, w jaki sposób «Yoyo Screenshot» przetwarza informacje związane z korzystaniem z tej aplikacji.
+
+1. Jakie informacje zbieramy
+Ta aplikacja to lokalne narzędzie do zrzutów ekranu zainstalowane na urządzeniu. Nie zbieramy, nie przesyłamy ani nie przekazujemy na serwery za jej pośrednictwem danych tożsamości osobistej, konta, kontaktu ani lokalizacji i nie prowadzimy śledzenia reklamowego ani analizy zachowań.
+
+Treści, które mogą być lokalnie przetwarzane, ograniczają się do:
+1. obrazów ekranu i adnotacji tworzonych przy zrzucie;
+2. danych zrzutu przy kopiowaniu do schowka;
+3. lokalnych informacji diagnostycznych awarii przy nieprawidłowym zakończeniu (jeśli wystąpią)—dla stabilności.
+
+2. Wykorzystanie i przechowywanie
+Zrzuty i powiązane pliki są domyślnie zapisywane w lokalnym folderze w katalogu instalacji (np. shots), abyś mógł je przeglądać, edytować, kopiować, usuwać lub eksportować. Dane pozostają na urządzeniu i nie przechodzą przez nasze serwery.
+
+3. Udostępnianie
+Nie sprzedajemy, nie wynajmujemy ani nie udostępniamy Twoich zrzutów ani opisanych danych lokalnych stronom trzecim. Jeśli samodzielnie wkleisz, wyślesz lub prześlesz zrzuty do innego oprogramowania/stron, obowiązują polityki prywatności tych usług.
+
+4. Uprawnienia
+Do zrzutów, powiadomień zasobnika i globalnych skrótów aplikacja może potrzebować dostępu do zawartości ekranu, systemu plików i schowka. Te możliwości służą wyłącznie funkcjom lokalnym, nie zdalnemu zbieraniu danych.
+
+5. Prywatność dzieci
+Aplikacja jest przeznaczona dla użytkowników ogólnych, nie specjalnie dla dzieci, i nie zbiera świadomie danych osobowych dzieci.
+
+6. Aktualizacje polityki
+W przypadku aktualizacji opublikujemy treść na stronie produktu w Store lub w odpowiednim miejscu w aplikacji. Dalsze korzystanie oznacza zapoznanie się ze zaktualizowaną polityką.
+
+7. Kontakt
+W razie pytań o tę politykę skontaktuj się z wydawcą «海边知心人» przez dane wsparcia na stronie produktu Microsoft Store.

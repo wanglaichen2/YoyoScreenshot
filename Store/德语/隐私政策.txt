@@ -1,0 +1,32 @@
+Datenschutzrichtlinie von Yoyo Screenshot
+
+Gültig ab: 8. Oktober 2026
+Herausgeber: 海边知心人
+
+Diese Richtlinie erläutert, wie „Yoyo Screenshot“ Informationen im Zusammenhang mit Ihrer Nutzung dieser App verarbeitet.
+
+1. Welche Informationen wir erfassen
+Diese App ist ein lokales Screenshot-Tool auf Ihrem Gerät. Wir erfassen, laden oder übertragen über diese App keine personenbezogenen Identitätsdaten, Konten, Kontaktdaten oder Standortdaten an Server und führen kein Werbe-Tracking oder Verhaltensanalysen durch.
+
+Lokal kann die App ausschließlich Folgendes verarbeiten:
+1. Bildschirminhalte und Annotationen, die Sie beim Erstellen eines Screenshots erzeugen;
+2. Screenshot-Daten, wenn Sie diese in die Zwischenablage kopieren;
+3. ggf. lokal erzeugte Absturzdiagnoseinformationen bei abnormalem Beenden, zur Stabilitätssicherung.
+
+2. Verwendung und Speicherung
+Screenshots und zugehörige Dateien werden standardmäßig in einem lokalen Ordner unter dem Installationsverzeichnis (z. B. shots) gespeichert—nur für Sie zum Ansehen, Bearbeiten, Kopieren, Löschen oder Exportieren. Die Daten verbleiben auf Ihrem Gerät und durchlaufen keine unserer Server.
+
+3. Weitergabe
+Wir verkaufen, vermieten oder teilen Ihre Screenshots oder die genannten lokalen Daten nicht mit Dritten. Wenn Sie Screenshots selbst in andere Software/Websites einfügen, senden oder hochladen, gelten die Datenschutzrichtlinien dieser Dienste.
+
+4. Berechtigungen
+Für Screenshots, Tray-Benachrichtigungen und globale Hotkeys kann die App auf Bildschirminhalte, Dateisystem und Zwischenablage zugreifen. Diese Fähigkeiten dienen nur lokalen Funktionen, nicht der Fern-Datenerfassung.
+
+5. Datenschutz von Kindern
+Die App richtet sich an allgemeine Nutzer, nicht speziell an Kinder, und erfasst wissentlich keine personenbezogenen Daten von Kindern.
+
+6. Richtlinienaktualisierungen
+Bei Aktualisierungen veröffentlichen wir den neuen Inhalt auf der Store-Produktseite oder an geeigneter Stelle in der App. Die weitere Nutzung gilt als Kenntnisnahme der aktualisierten Richtlinie.
+
+7. Kontakt
+Bei Fragen zu dieser Datenschutzrichtlinie kontaktieren Sie den Herausgeber „海边知心人“ über die Support-Kontaktdaten auf der Microsoft-Store-Produktseite.

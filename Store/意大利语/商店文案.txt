@@ -1,0 +1,60 @@
+Yoyo Screenshot — Testi Microsoft Store
+Versione: 1.0.4
+Editore: 海边知心人
+
+
+============================================================
+1. Descrizione
+============================================================
+
+Yoyo Screenshot è uno strumento di cattura schermo leggero e pratico per Windows. Supporta cattura a selezione e a schermo intero, consente di annotare durante la cattura (penna, rettangolo, freccia, ecc.) e offre la gestione della cronologia con miniature: anteprima, copia, appunta ed elimina. L’app può restare nella barra di sistema; chiudere la finestra non termina l’app—puoi catturare in qualsiasi momento con le scorciatoie.
+
+Ideale per ufficio, demo didattiche, segnalazioni di bug e condivisione di immagini in chat. Gli screenshot vengono salvati in locale—nessun account richiesto. Pronto all’uso.
+
+
+============================================================
+2. Novità di questa versione
+============================================================
+
+1.0.4:
+- Numeri di versione unificati per GitHub Release / installer / MSIX
+- Packaging MSIX con versione a quattro segmenti da riga di comando
+- Correzione del flusso di packaging per conflitti nome/versione nello Store
+
+1.0.1:
+- Aggiornamento versione pacchetto Store e risorse icone
+- Correzione conflitto versione pacchetto Store (stesso nome 1.0.0.0 con contenuto incoerente)
+
+1.0.0 prima versione ufficiale Store include:
+- Cattura a selezione e schermo intero
+- Annotazione: penna / rettangolo / freccia, ecc.
+- Miniature cronologia: seleziona, doppio clic per modificare, tasto destro per anteprima / copia / appunta / elimina
+- Presenza nella barra di sistema; chiudere la finestra riduce a icona nella barra
+- Scorciatoie: Ctrl+Alt+I selezione; Ctrl+Alt+Maiusc+I schermo intero
+- Salvataggio nella cartella locale shots
+
+
+============================================================
+3. Funzionalità del prodotto
+============================================================
+
+- Cattura a selezione: trascina per selezionare qualsiasi area dello schermo
+- Cattura a schermo intero: cattura lo schermo corrente con un clic
+- Strumenti di annotazione: penna, rettangolo, freccia, ecc.—annota durante la cattura
+- Riedizione: riapri screenshot esistenti per annotare e salvare
+- Cronologia: elenco miniature con anteprima, appunti, appunta ed elimina
+- Barra di sistema: in background, disponibile in qualsiasi momento
+- Scorciatoie globali: Ctrl+Alt+I / Ctrl+Alt+Maiusc+I
+- Archiviazione locale: file nella cartella shots sotto la directory dell’app; dati sul dispositivo
+- Installazione leggera: MSIX per Windows 10/11 desktop (x64)
+
+
+============================================================
+Suggerimenti Partner Center
+============================================================
+
+- Nome app: Yoyo Screenshot / 悠悠截图
+- Nome visualizzato editore: 海边知心人
+- Famiglia dispositivi: selezionare Windows.Desktop
+- Informativa sulla privacy: URL HTTPS pubblico con certificato valido
+- Loghi: PNG nella cartella Logos (consigliato: StoreLogo_300x300.png)

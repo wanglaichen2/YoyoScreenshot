@@ -1,0 +1,32 @@
+Informativa sulla privacy di Yoyo Screenshot
+
+Data di entrata in vigore: 8 ottobre 2026
+Editore: 海边知心人
+
+La presente informativa spiega come «Yoyo Screenshot» tratta le informazioni relative all’uso di questa app.
+
+1. Quali informazioni raccogliamo
+Questa app è uno strumento di cattura locale installato sul tuo dispositivo. Non raccogliamo, carichiamo né trasmettiamo a server le tue informazioni di identità personale, account, contatti o posizione tramite questa app, né effettuiamo tracciamento pubblicitario o analisi comportamentali.
+
+I contenuti che possono essere elaborati localmente si limitano a:
+1. Immagini dello schermo e annotazioni create quando esegui uno screenshot;
+2. Dati dello screenshot quando scegli di copiarli negli Appunti;
+3. Eventuali informazioni diagnostiche di arresto anomalo generate localmente in caso di chiusura anomala, per la stabilità.
+
+2. Uso e archiviazione
+Gli screenshot e i file correlati sono salvati per impostazione predefinita in una cartella locale sotto la directory di installazione (es. shots), per visualizzare, modificare, copiare, eliminare o esportare. Questi dati restano sul tuo dispositivo e non passano dai nostri server.
+
+3. Condivisione
+Non vendiamo, affittiamo né condividiamo i tuoi screenshot o i dati locali descritti con terzi. Se incolli, invii o carichi screenshot su altri software/siti, valgono le informative sulla privacy di tali servizi.
+
+4. Autorizzazioni
+Per cattura, notifiche della barra di sistema e scorciatoie globali, l’app può accedere al contenuto dello schermo, al file system e agli Appunti. Queste capacità servono solo alle funzioni locali, non alla raccolta remota.
+
+5. Privacy dei minori
+L’app è destinata agli utenti generali, non specificamente ai minori, e non raccoglie consapevolmente informazioni personali di bambini.
+
+6. Aggiornamenti dell’informativa
+In caso di aggiornamento, pubblicheremo il contenuto aggiornato nella pagina del prodotto sullo Store o in un punto appropriato nell’app. L’uso continuato implica la presa visione dell’informativa aggiornata.
+
+7. Contatti
+Per domande su questa informativa, contatta l’editore «海边知心人» tramite le informazioni di supporto nella pagina del prodotto Microsoft Store.

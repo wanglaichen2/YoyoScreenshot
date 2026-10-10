@@ -1,0 +1,32 @@
+Chính sách quyền riêng tư của Yoyo Screenshot
+
+Ngày hiệu lực: 8 tháng 10 năm 2026
+Nhà phát hành: 海边知心人
+
+Chính sách này giải thích cách «Yoyo Screenshot» xử lý thông tin liên quan đến việc bạn sử dụng ứng dụng này.
+
+1. Chúng tôi thu thập thông tin gì
+Ứng dụng này là công cụ chụp màn hình cục bộ cài trên thiết bị của bạn. Chúng tôi không thu thập, tải lên hay truyền tới máy chủ thông tin định danh cá nhân, tài khoản, liên hệ hay vị trí qua ứng dụng này, và không theo dõi quảng cáo hay phân tích hành vi.
+
+Nội dung có thể được xử lý cục bộ chỉ gồm:
+1. Hình ảnh màn hình và chú thích khi bạn chủ động chụp;
+2. Dữ liệu ảnh chụp khi bạn chọn sao chép vào clipboard;
+3. Thông tin chẩn đoán sự cố có thể được tạo cục bộ khi thoát bất thường (nếu có), để đảm bảo ổn định.
+
+2. Cách sử dụng và lưu trữ
+Ảnh chụp và tệp liên quan mặc định được lưu trong thư mục cục bộ dưới thư mục cài đặt (ví dụ shots), để bạn xem, chỉnh sửa, sao chép, xóa hoặc xuất. Dữ liệu này nằm trên thiết bị và không đi qua máy chủ của chúng tôi.
+
+3. Chia sẻ thông tin
+Chúng tôi không bán, cho thuê hay chia sẻ ảnh chụp hoặc dữ liệu cục bộ nêu trên với bên thứ ba. Nếu bạn tự dán, gửi hoặc tải ảnh lên phần mềm/trang web khác, chính sách quyền riêng tư của dịch vụ đó sẽ áp dụng.
+
+4. Quyền truy cập
+Để chụp màn hình, thông báo khay và phím tắt toàn cục, ứng dụng có thể cần truy cập nội dung màn hình, hệ thống tệp và clipboard. Các khả năng này chỉ dùng cho chức năng cục bộ, không thu thập dữ liệu từ xa.
+
+5. Quyền riêng tư trẻ em
+Ứng dụng dành cho người dùng chung, không hướng tới trẻ em, và không cố ý thu thập thông tin cá nhân của trẻ em.
+
+6. Cập nhật chính sách
+Khi cập nhật, chúng tôi sẽ công bố nội dung trên trang sản phẩm Store hoặc vị trí thích hợp trong ứng dụng. Tiếp tục sử dụng nghĩa là bạn đã biết chính sách đã cập nhật.
+
+7. Liên hệ
+Nếu có câu hỏi về chính sách này, hãy liên hệ nhà phát hành «海边知心人» qua thông tin hỗ trợ trên trang sản phẩm Microsoft Store.

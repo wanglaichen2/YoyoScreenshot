@@ -1,0 +1,32 @@
+Política de Privacidade do Yoyo Screenshot
+
+Data de vigência: 8 de outubro de 2026
+Publicador: 海边知心人
+
+Esta política explica como o «Yoyo Screenshot» trata informações relacionadas ao uso deste aplicativo.
+
+1. Quais informações coletamos
+Este app é uma ferramenta de captura local instalada no seu dispositivo. Não coletamos, enviamos nem transmitimos a servidores, por meio deste app, suas informações de identidade pessoal, conta, contato ou localização, e não fazemos rastreamento publicitário nem análise comportamental.
+
+O conteúdo que pode ser processado localmente limita-se a:
+1. Imagens da tela e anotações criadas ao capturar;
+2. Dados da captura ao copiar para a área de transferência;
+3. Informações de diagnóstico de falha que possam ser geradas localmente em caso de encerramento anormal (se houver), para estabilidade.
+
+2. Uso e armazenamento
+As capturas e arquivos relacionados são salvos por padrão em uma pasta local no diretório de instalação (ex.: shots), para você visualizar, editar, copiar, excluir ou exportar. Esses dados permanecem no seu dispositivo e não passam pelos nossos servidores.
+
+3. Compartilhamento
+Não vendemos, alugamos nem compartilhamos suas capturas ou os dados locais descritos com terceiros. Se você colar, enviar ou carregar capturas em outros softwares/sites, aplicam-se as políticas de privacidade desses serviços.
+
+4. Permissões
+Para captura, notificações da bandeja e atalhos globais, o app pode precisar acessar o conteúdo da tela, o sistema de arquivos e a área de transferência. Esses recursos servem apenas a funções locais, não à coleta remota.
+
+5. Privacidade de crianças
+O app é destinado a usuários gerais, não especificamente a crianças, e não coleta intencionalmente informações pessoais de menores.
+
+6. Atualizações da política
+Se esta política for atualizada, publicaremos o conteúdo na página do produto na Store ou em local adequado no app. O uso contínuo significa que você toma conhecimento da política atualizada.
+
+7. Contato
+Em caso de dúvidas sobre esta política, contate o publicador «海边知心人» pelos dados de suporte na página do produto na Microsoft Store.

@@ -1,0 +1,60 @@
+Yoyo Screenshot — Microsoft Store Listing Copy
+Version: 1.0.4
+Publisher: 海边知心人
+
+
+============================================================
+1. Description
+============================================================
+
+Yoyo Screenshot is a lightweight, easy-to-use screenshot tool for Windows. It supports region capture and full-screen capture, lets you annotate while capturing (pen, rectangle, arrow, and more), and provides history thumbnail management: preview, copy, pin-to-screen, and delete. The app can stay in the system tray; closing the window does not quit the app, so you can capture anytime with hotkeys.
+
+Ideal for office work, teaching demos, bug reports, and sharing images in chat. Screenshots are saved locally—no account sign-in required. Ready to use out of the box.
+
+
+============================================================
+2. What’s new in this version
+============================================================
+
+1.0.4:
+- Unified version numbers across GitHub Release / installer / MSIX
+- MSIX packaging supports specifying a four-part version via command line
+- Fixed packaging flow issues related to same-name/same-version Store package conflicts
+
+1.0.1:
+- Updated Store package version and icon resources
+- Fixed Store package version conflict (same name 1.0.0.0 with inconsistent content)
+
+1.0.0 first official Store release includes:
+- Region capture and full-screen capture
+- Screenshot annotation: pen / rectangle / arrow, and more
+- History thumbnails: select, double-click to edit, right-click to preview / copy / pin / delete
+- System tray residency; closing the window minimizes to the tray
+- Hotkeys: Ctrl+Alt+I for region; Ctrl+Alt+Shift+I for full screen
+- Screenshots saved to the local shots folder
+
+
+============================================================
+3. Product features
+============================================================
+
+- Region capture: drag to select any screen area
+- Full-screen capture: capture the current screen in one click
+- Annotation tools: pen, rectangle, arrow, and more—annotate while capturing
+- Re-edit: reopen existing screenshots to annotate and save
+- History management: thumbnail list with preview, copy to clipboard, pin-to-screen, and delete
+- Tray residency: runs in the background, ready anytime
+- Global hotkeys: Ctrl+Alt+I / Ctrl+Alt+Shift+I
+- Local storage: files are written to the shots folder under the app directory; data stays on your device
+- Lightweight install: MSIX install for Windows 10/11 desktop devices (x64)
+
+
+============================================================
+Partner Center tips
+============================================================
+
+- App name: Yoyo Screenshot / 悠悠截图
+- Publisher display name: 海边知心人
+- Device family: check Windows.Desktop
+- Privacy policy: must use a public HTTPS URL with a valid certificate
+- Logos: use PNGs under the Logos folder (Store listing recommended: StoreLogo_300x300.png)

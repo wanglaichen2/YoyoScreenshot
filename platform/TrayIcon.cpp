@@ -70,7 +70,7 @@ bool TrayIcon::Add(HWND hwnd, UINT callbackMsg, const wchar_t* tip)
 	nid.uCallbackMessage = callbackMsg;
 	nid.hIcon = LoadAppIcon();
 
-	wcsncpy_s(nid.szTip, tip ? tip : L"悠悠截图", _TRUNCATE);
+	wcsncpy_s(nid.szTip, tip ? tip : L"YouYou Screenshot", _TRUNCATE);
 
 	if (!Shell_NotifyIconW(NIM_ADD, &nid))
 	{

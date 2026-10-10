@@ -4,6 +4,10 @@
   Identity.Name / Publisher 必须与 Partner Center 预留身份一致。
   PublisherDisplayName 必须与发布者显示名一致。
   签名证书 Subject 须与 Identity.Publisher 一致（本地测试证书已按此 CN 生成）。
+
+  DisplayName / Description 使用 ms-resource，由 Strings\<lang>\Resources.resw
+  + MakePri 生成 resources.pri，开始菜单随 Windows 显示语言切换。
+  名称表见 localized_names.json（与 Store\商店名称对照表 对齐）。
 -->
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -18,9 +22,9 @@
     ProcessorArchitecture="x64" />
 
   <Properties>
-    <DisplayName>悠悠截图</DisplayName>
+    <DisplayName>ms-resource:AppDisplayName</DisplayName>
     <PublisherDisplayName>海边知心人</PublisherDisplayName>
-    <Description>悠悠截图 — 区域/全屏截图工具</Description>
+    <Description>ms-resource:AppDescription</Description>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -33,7 +37,26 @@
 
   <Resources>
     <Resource Language="zh-cn" />
+    <Resource Language="zh-tw" />
     <Resource Language="en-us" />
+    <Resource Language="de-de" />
+    <Resource Language="fr-fr" />
+    <Resource Language="es-es" />
+    <Resource Language="it-it" />
+    <Resource Language="ja-jp" />
+    <Resource Language="ko-kr" />
+    <Resource Language="ru-ru" />
+    <Resource Language="pt-br" />
+    <Resource Language="nl-nl" />
+    <Resource Language="pl-pl" />
+    <Resource Language="ro-ro" />
+    <Resource Language="tr-tr" />
+    <Resource Language="vi-vn" />
+    <Resource Language="th-th" />
+    <Resource Language="az-az" />
+    <Resource Language="ka-ge" />
+    <Resource Language="mn-mn" />
+    <Resource Language="my-mm" />
   </Resources>
 
   <Applications>
@@ -42,14 +65,21 @@
       Executable="YoyoScreenshot.exe"
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
-        DisplayName="悠悠截图"
-        Description="悠悠截图 — 区域/全屏截图工具"
+        DisplayName="ms-resource:AppDisplayName"
+        Description="ms-resource:AppDescription"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
         <uap:DefaultTile
           Wide310x150Logo="Assets\Wide310x150Logo.png"
-          Square310x310Logo="Assets\Square310x310Logo.png" />
+          Square310x310Logo="Assets\Square310x310Logo.png"
+          ShortName="ms-resource:TileShortName">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>

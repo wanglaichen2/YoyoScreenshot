@@ -1,0 +1,32 @@
+Yoyo Screenshot Məxfilik Siyasəti
+
+Qüvvəyə minmə tarixi: 8 oktyabr 2026
+Nəşriyyatçı: 海边知心人
+
+Bu siyasət «Yoyo Screenshot»-un bu tətbiqdən istifadə ilə bağlı məlumatları necə emal etdiyini izah edir.
+
+1. Hansı məlumatları toplayırıq
+Bu tətbiq cihazınıza quraşdırılmış yerli ekran görüntüsü alətidir. Biz bu tətbiq vasitəsilə şəxsi kimlik, hesab, əlaqə və ya məkan məlumatlarınızı toplamırıq, yükləmirik və ya serverə ötürmürük; reklam izləməsi və ya davranış analizi aparmırıq.
+
+Yerli emal oluna bilən məzmun yalnız bunlarla məhdudlaşır:
+1. Ekran görüntüsü çəkərkən yaratdığınız ekran şəkilləri və annotasiyalar;
+2. Buferə kopyalamağı seçdiyinizdə ekran görüntüsü məlumatları;
+3. Sabitlik üçün anormal çıxışda yerli yaradıla bilən qəza diaqnostika məlumatları (əgər varsa).
+
+2. İstifadə və saxlama
+Ekran görüntüləri və əlaqəli fayllar standart olaraq quraşdırma kataloqu altındakı yerli qovluqda (məs. shots) saxlanılır—baxmaq, redaktə etmək, kopyalamaq, silmək və ya ixrac etmək üçün. Bu məlumatlar cihazınızda qalır və serverlərimizdən keçmir.
+
+3. Paylaşma
+Ekran görüntülərinizi və ya yuxarıdakı yerli məlumatları üçüncü tərəflərə satmırıq, icarəyə vermirik və ya paylaşmırıq. Ekran görüntülərini digər proqramlara/saytlara özünüz yapışdırır, göndərir və ya yükləyirsinizsə, həmin xidmətlərin məxfilik siyasətləri tətbiq olunur.
+
+4. İcazələr
+Ekran görüntüsü, tray bildirişləri və qlobal qısayollar üçün tətbiq ekran məzmununa, fayl sisteminə və buferə giriş tələb edə bilər. Bu imkanlar yalnız yerli funksiyalar üçündür, uzaqdan məlumat toplamaq üçün deyil.
+
+5. Uşaqların məxfiliyi
+Tətbiq ümumi istifadəçilər üçündür, xüsusi olaraq uşaqlar üçün deyil və uşaqların şəxsi məlumatlarını bilərəkdən toplamır.
+
+6. Siyasət yeniləmələri
+Yeniləmə olduqda məzmunu Store məhsul səhifəsində və ya tətbiqdə uyğun yerdə dərc edəcəyik. Davamlı istifadə yenilənmiş siyasəti bildiyiniz anlamına gəlir.
+
+7. Əlaqə
+Bu məxfilik siyasəti ilə bağlı suallar üçün Microsoft Store məhsul səhifəsindəki dəstək əlaqə məlumatları vasitəsilə nəşriyyatçı «海边知心人» ilə əlaqə saxlayın.

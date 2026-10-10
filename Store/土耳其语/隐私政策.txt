@@ -1,0 +1,32 @@
+Yoyo Screenshot Gizlilik Politikası
+
+Yürürlük tarihi: 8 Ekim 2026
+Yayımcı: 海边知心人
+
+Bu politika, «Yoyo Screenshot» uygulamasının kullanımınızla ilgili bilgileri nasıl işlediğini açıklar.
+
+1. Hangi bilgileri topluyoruz
+Bu uygulama, cihazınıza kurulan yerel bir ekran görüntüsü aracıdır. Bu uygulama aracılığıyla kişisel kimlik bilgilerinizi, hesap, iletişim veya konum verilerinizi toplamayız, yüklemeyiz veya sunucuya iletmeyiz; reklam takibi veya davranış analizi yapmayız.
+
+Yerel olarak işlenebilecek içerik yalnızca şunlarla sınırlıdır:
+1. Ekran görüntüsü alırken oluşturduğunuz ekran görüntüleri ve notlar;
+2. Panoya kopyalamayı seçtiğinizde ekran görüntüsü verileri;
+3. Kararlılık için anormal çıkışta yerel olarak oluşabilecek çökme tanı bilgileri (varsa).
+
+2. Kullanım ve depolama
+Ekran görüntüleri ve ilgili dosyalar varsayılan olarak kurulum dizini altındaki yerel bir klasöre (ör. shots) kaydedilir; görüntüleme, düzenleme, kopyalama, silme veya dışa aktarma sizin içindir. Bu veriler cihazınızda kalır ve sunucularımızdan geçmez.
+
+3. Paylaşım
+Ekran görüntülerinizi veya yukarıdaki yerel verileri üçüncü taraflara satmaz, kiralamaz veya paylaşmayız. Ekran görüntülerini başka yazılımlara/sitlere kendiniz yapıştırır, gönderir veya yüklerseniz, o hizmetlerin gizlilik politikaları geçerlidir.
+
+4. İzinler
+Ekran görüntüsü, tepsi bildirimleri ve genel kısayollar için uygulama ekran içeriğine, dosya sistemine ve panoya erişebilir. Bu yetenekler yalnızca yerel işlevler içindir, uzaktan veri toplama için değildir.
+
+5. Çocukların gizliliği
+Uygulama genel kullanıcılara yöneliktir, özellikle çocuklara yönelik değildir ve çocukların kişisel bilgilerini bilerek toplamaz.
+
+6. Politika güncellemeleri
+Politika güncellenirse, güncellenmiş içeriği Store ürün sayfasında veya uygulama içinde uygun bir yerde yayımlarız. Kullanıma devam etmek, güncellenmiş politikayı bildiğiniz anlamına gelir.
+
+7. İletişim
+Bu gizlilik politikası hakkında sorularınız için Microsoft Store ürün sayfasındaki destek iletişim bilgileri üzerinden yayımcı «海边知心人» ile iletişime geçin.

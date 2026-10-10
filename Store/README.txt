@@ -7,6 +7,8 @@ Microsoft Store 上架资料目录
 --------
 隐私政策.txt          隐私策略全文（可粘贴到 Partner Center「隐私策略文本」）
 商店文案.txt          含：1说明 / 2此版本新增功能 / 3产品功能
+商店名称对照表.txt    各语言商店「产品名称」选用对照（悠悠截图 / Yoyo Screenshot）
+各语言子文件夹\       按语言存放的商店文案与隐私政策（如 中文\、英语\）
 Logos\                商店与 MSIX 用徽标 PNG
 
 Logos 建议用法

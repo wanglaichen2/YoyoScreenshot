@@ -1,0 +1,32 @@
+Política de privacidad de Yoyo Screenshot
+
+Fecha de vigencia: 8 de octubre de 2026
+Publicador: 海边知心人
+
+Esta política explica cómo «Yoyo Screenshot» trata la información relacionada con el uso de esta aplicación.
+
+1. Qué información recopilamos
+Esta aplicación es una herramienta de captura local instalada en su dispositivo. No recopilamos, subimos ni transmitimos a ningún servidor su identidad personal, cuenta, datos de contacto o ubicación a través de esta aplicación, ni realizamos seguimiento publicitario ni análisis de comportamiento.
+
+El contenido que puede procesarse localmente se limita a:
+1. Imágenes de pantalla y anotaciones creadas al capturar;
+2. Datos de captura cuando elige copiarlos al portapapeles;
+3. Información de diagnóstico de fallos que pueda generarse localmente si la app se cierra de forma anómala (si existe), para mantener la estabilidad.
+
+2. Uso y almacenamiento
+Las capturas y archivos relacionados se guardan de forma predeterminada en una carpeta local bajo el directorio de instalación (p. ej. shots), para que usted los vea, edite, copie, elimine o exporte. Estos datos permanecen en su dispositivo y no pasan por nuestros servidores.
+
+3. Compartición
+No vendemos, alquilamos ni compartimos sus capturas ni los datos locales descritos con terceros. Si usted pega, envía o sube capturas a otro software/sitio, rigen las políticas de privacidad de esos servicios.
+
+4. Permisos
+Para captura, notificaciones de bandeja y atajos globales, la aplicación puede acceder al contenido de la pantalla, al sistema de archivos y al portapapeles. Estas capacidades solo se usan para funciones locales, no para recopilación remota.
+
+5. Privacidad de menores
+La aplicación está dirigida a usuarios generales, no específicamente a niños, y no recopila a sabiendas información personal de menores.
+
+6. Actualizaciones de la política
+Si se actualiza esta política, publicaremos el contenido en la página del producto de la Store o en un lugar adecuado dentro de la app. El uso continuado implica el conocimiento de la política actualizada.
+
+7. Contacto
+Si tiene preguntas sobre esta política de privacidad, contacte al publicador «海边知心人» mediante la información de soporte de la página del producto en Microsoft Store.

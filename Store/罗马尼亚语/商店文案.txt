@@ -1,0 +1,60 @@
+Yoyo Screenshot — texte Microsoft Store
+Versiune: 1.0.4
+Editor: 海边知心人
+
+
+============================================================
+1. Descriere
+============================================================
+
+Yoyo Screenshot este un instrument ușor și practic de captură de ecran pentru Windows. Suportă captura pe regiune și pe ecran complet, permite adnotarea în timpul capturii (creion, dreptunghi, săgeată etc.) și oferă gestionarea istoricului cu miniaturi: previzualizare, copiere, fixare și ștergere. Aplicația poate rămâne în zona de notificare; închiderea ferestrei nu o oprește—puteți captura oricând cu scurtături.
+
+Ideal pentru birou, demonstrații didactice, rapoarte de erori și partajarea imaginilor în chat. Capturile sunt salvate local—fără cont. Gata de utilizare imediat.
+
+
+============================================================
+2. Noutăți în această versiune
+============================================================
+
+1.0.4:
+- Numere de versiune unificate pentru GitHub Release / instalator / MSIX
+- Empachetare MSIX cu versiune pe patru segmente din linia de comandă
+- Corectarea fluxului de empachetare pentru conflicte de nume/versiune în Store
+
+1.0.1:
+- Actualizare versiune pachet Store și resurse pictograme
+- Remediere conflict versiune pachet Store (același nume 1.0.0.0 cu conținut inconsistent)
+
+1.0.0 prima versiune oficială Store include:
+- Captură pe regiune și ecran complet
+- Adnotare: creion / dreptunghi / săgeată etc.
+- Miniaturi istoric: selectare, dublu-clic pentru editare, clic dreapta pentru previzualizare / copiere / fixare / ștergere
+- Prezență în zona de notificare; închiderea ferestrei minimizează în tray
+- Scurtături: Ctrl+Alt+I regiune; Ctrl+Alt+Shift+I ecran complet
+- Salvare în folderul local shots
+
+
+============================================================
+3. Funcții produs
+============================================================
+
+- Captură pe regiune: trageți pentru a selecta orice zonă a ecranului
+- Captură ecran complet: capturați ecranul curent cu un clic
+- Instrumente de adnotare: creion, dreptunghi, săgeată etc.—adnotați la captură
+- Reeditoare: redeschideți capturi existente pentru a adnota și salva
+- Istoric: listă de miniaturi cu previzualizare, clipboard, fixare și ștergere
+- Tray: în fundal, disponibil oricând
+- Scurtături globale: Ctrl+Alt+I / Ctrl+Alt+Shift+I
+- Stocare locală: fișiere în folderul shots din directorul aplicației; date pe dispozitiv
+- Instalare ușoară: MSIX pentru Windows 10/11 desktop (x64)
+
+
+============================================================
+Sfaturi Partner Center
+============================================================
+
+- Nume aplicație: Yoyo Screenshot / 悠悠截图
+- Nume afișat editor: 海边知心人
+- Familie dispozitive: bifați Windows.Desktop
+- Politică de confidențialitate: URL HTTPS public cu certificat valid
+- Logo-uri: PNG din folderul Logos (recomandat: StoreLogo_300x300.png)

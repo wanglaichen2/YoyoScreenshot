@@ -1,0 +1,32 @@
+Politica de confidențialitate Yoyo Screenshot
+
+Data intrării în vigoare: 8 octombrie 2026
+Editor: 海边知心人
+
+Această politică explică modul în care «Yoyo Screenshot» tratează informațiile legate de utilizarea acestei aplicații.
+
+1. Ce informații colectăm
+Această aplicație este un instrument local de captură instalat pe dispozitivul dvs. Nu colectăm, nu încărcăm și nu transmitem pe servere, prin această aplicație, informații de identitate personală, cont, contact sau locație și nu facem urmărire publicitară sau analiză comportamentală.
+
+Conținutul care poate fi procesat local se limitează la:
+1. Imagini de ecran și adnotări create la captură;
+2. Datele capturii când alegeți să le copiați în clipboard;
+3. Informații de diagnostic crash generate local la închiderea anormală (dacă există), pentru stabilitate.
+
+2. Utilizare și stocare
+Capturile și fișierele aferente sunt salvate implicit într-un folder local din directorul de instalare (ex. shots), pentru vizualizare, editare, copiere, ștergere sau export. Aceste date rămân pe dispozitiv și nu trec prin serverele noastre.
+
+3. Partajare
+Nu vindem, nu închiriem și nu partajăm capturile dvs. sau datele locale descrise cu terți. Dacă lipiți, trimiteți sau încărcați capturi în alt software/site, se aplică politicile de confidențialitate ale acelor servicii.
+
+4. Permisiuni
+Pentru captură, notificări tray și scurtături globale, aplicația poate avea nevoie de acces la conținutul ecranului, sistemul de fișiere și clipboard. Aceste capabilități sunt doar pentru funcții locale, nu pentru colectare la distanță.
+
+5. Confidențialitatea copiilor
+Aplicația este destinată utilizatorilor generali, nu special copiilor, și nu colectează intenționat informații personale ale copiilor.
+
+6. Actualizări ale politicii
+La actualizare, vom publica conținutul pe pagina produsului din Store sau într-un loc potrivit din aplicație. Continuarea utilizării înseamnă că ați luat cunoștință de politica actualizată.
+
+7. Contact
+Pentru întrebări despre această politică, contactați editorul «海边知心人» prin informațiile de suport de pe pagina produsului Microsoft Store.

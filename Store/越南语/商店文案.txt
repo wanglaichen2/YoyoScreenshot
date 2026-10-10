@@ -1,0 +1,60 @@
+Yoyo Screenshot — Nội dung Microsoft Store
+Phiên bản: 1.0.4
+Nhà phát hành: 海边知心人
+
+
+============================================================
+1. Mô tả
+============================================================
+
+Yoyo Screenshot là công cụ chụp màn hình nhẹ, dễ dùng cho Windows. Hỗ trợ chụp vùng và toàn màn hình, cho phép chú thích ngay khi chụp (bút, hình chữ nhật, mũi tên…), và quản lý lịch sử bằng hình thu nhỏ: xem trước, sao chép, ghim, xóa. Ứng dụng có thể nằm trên khay hệ thống; đóng cửa sổ không thoát app—bạn có thể chụp bất cứ lúc nào bằng phím tắt.
+
+Phù hợp cho công việc văn phòng, demo giảng dạy, báo lỗi và chia sẻ ảnh trong chat. Ảnh chụp lưu cục bộ—không cần đăng nhập tài khoản. Sẵn sàng dùng ngay.
+
+
+============================================================
+2. Tính năng mới trong phiên bản này
+============================================================
+
+1.0.4:
+- Thống nhất số phiên bản GitHub Release / trình cài đặt / MSIX
+- Đóng gói MSIX hỗ trợ chỉ định phiên bản bốn phần qua dòng lệnh
+- Sửa quy trình đóng gói liên quan xung đột tên/phiên bản gói Store
+
+1.0.1:
+- Cập nhật phiên bản gói Store và tài nguyên biểu tượng
+- Sửa xung đột phiên bản gói Store (cùng tên 1.0.0.0 nội dung không nhất quán)
+
+1.0.0 phiên bản Store chính thức đầu tiên bao gồm:
+- Chụp vùng và toàn màn hình
+- Chú thích: bút / hình chữ nhật / mũi tên…
+- Hình thu nhỏ lịch sử: chọn, nhấp đôi để sửa, chuột phải xem trước / sao chép / ghim / xóa
+- Luôn trên khay hệ thống; đóng cửa sổ thu nhỏ xuống khay
+- Phím tắt: Ctrl+Alt+I vùng; Ctrl+Alt+Shift+I toàn màn hình
+- Lưu vào thư mục shots cục bộ
+
+
+============================================================
+3. Tính năng sản phẩm
+============================================================
+
+- Chụp vùng: kéo chọn vùng màn hình bất kỳ
+- Chụp toàn màn hình: chụp màn hình hiện tại bằng một cú nhấp
+- Công cụ chú thích: bút, hình chữ nhật, mũi tên…—chú thích khi chụp
+- Chỉnh sửa lại: mở lại ảnh đã chụp để chú thích và lưu
+- Quản lý lịch sử: danh sách hình thu nhỏ với xem trước, clipboard, ghim và xóa
+- Khay hệ thống: chạy nền, gọi bất cứ lúc nào
+- Phím tắt toàn cục: Ctrl+Alt+I / Ctrl+Alt+Shift+I
+- Lưu cục bộ: tệp ghi vào thư mục shots trong thư mục ứng dụng; dữ liệu ở trên máy
+- Cài đặt nhẹ: MSIX cho Windows 10/11 máy tính để bàn (x64)
+
+
+============================================================
+Gợi ý Partner Center
+============================================================
+
+- Tên ứng dụng: Yoyo Screenshot / 悠悠截图
+- Tên hiển thị nhà phát hành: 海边知心人
+- Họ thiết bị: chọn Windows.Desktop
+- Chính sách quyền riêng tư: URL HTTPS công khai có chứng chỉ hợp lệ
+- Logo: PNG trong thư mục Logos (khuyến nghị: StoreLogo_300x300.png)

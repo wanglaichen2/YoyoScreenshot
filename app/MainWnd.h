@@ -72,6 +72,9 @@ public:
 private:
 	void BuildUi(int cx, int cy);
 	void BuildMenuBar(int cx);
+	/** Rebuild menu + refresh all localized main-window texts (call after LangSetPreference). */
+	void ApplyUiLanguage();
+	void SetStatusText(const wchar_t* langKey);
 	void RelayoutTools();
 	void PlaceToolEle(HELE hEle, int x, int y, int cx, int cy, BOOL show);
 	void ShowUsageHelp();

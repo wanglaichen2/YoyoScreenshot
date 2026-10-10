@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainWnd.h"
 #include "../platform/MiniDump.h"
+#include "../platform/Lang.h"
 #include <direct.h>
 #include <stdio.h>
 #include <string.h>
@@ -26,12 +27,13 @@ int main()
 {
 	ChdirToExe();
 	InitMiniDump();
+	spy::LangInit();
 
 	HANDLE mutex = CreateMutexA(NULL, FALSE, "Global\\YoyoScreenshot_Single");
 	if (GetLastError() == ERROR_ALREADY_EXISTS)
 	{
 		CloseHandle(mutex);
-		MessageBoxW(NULL, L"悠悠截图已在运行。", L"提示", MB_OK | MB_ICONINFORMATION);
+		MessageBoxW(NULL, spy::Tr(L"AlreadyRunning"), spy::Tr(L"Tip"), MB_OK | MB_ICONINFORMATION);
 		return 0;
 	}
 

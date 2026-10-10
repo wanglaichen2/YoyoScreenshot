@@ -1,0 +1,60 @@
+Yoyo Screenshot — teksty Microsoft Store
+Wersja: 1.0.4
+Wydawca: 海边知心人
+
+
+============================================================
+1. Opis
+============================================================
+
+Yoyo Screenshot to lekkie i wygodne narzędzie do zrzutów ekranu dla Windows. Obsługuje zrzut obszaru i pełnego ekranu, pozwala oznaczać podczas przechwytywania (pióro, prostokąt, strzałka itd.) oraz oferuje historię z miniaturami: podgląd, kopiowanie, przypinanie i usuwanie. Aplikacja może pozostać w zasobniku systemowym; zamknięcie okna nie kończy działania—zrzut można zrobić w każdej chwili skrótami.
+
+Idealna do biura, pokazów dydaktycznych, zgłaszania błędów i udostępniania obrazów na czacie. Zrzuty są zapisywane lokalnie—bez logowania. Gotowa do użycia od razu.
+
+
+============================================================
+2. Nowości w tej wersji
+============================================================
+
+1.0.4:
+- Ujednolicone numery wersji dla GitHub Release / instalatora / MSIX
+- Pakowanie MSIX z czteroczęściową wersją z wiersza poleceń
+- Poprawiono proces pakowania przy konfliktach nazwy/wersji w Store
+
+1.0.1:
+- Zaktualizowano wersję pakietu Store i zasoby ikon
+- Naprawiono konflikt wersji pakietu Store (ta sama nazwa 1.0.0.0 z niespójną zawartością)
+
+1.0.0 pierwsza oficjalna wersja Store obejmuje:
+- Zrzut obszaru i pełnego ekranu
+- Adnotacje: pióro / prostokąt / strzałka itd.
+- Miniatury historii: wybór, dwuklik do edycji, prawy przycisk: podgląd / kopiuj / przypnij / usuń
+- Obecność w zasobniku; zamknięcie okna minimalizuje do zasobnika
+- Skróty: Ctrl+Alt+I obszar; Ctrl+Alt+Shift+I pełny ekran
+- Zapis do lokalnego folderu shots
+
+
+============================================================
+3. Funkcje produktu
+============================================================
+
+- Zrzut obszaru: przeciągnij, aby wybrać dowolny obszar ekranu
+- Zrzut pełnego ekranu: przechwyt bieżącego ekranu jednym kliknięciem
+- Narzędzia adnotacji: pióro, prostokąt, strzałka itd.—oznaczaj podczas zrzutu
+- Ponowna edycja: otwórz istniejące zrzuty, oznacz i zapisz
+- Historia: lista miniatur z podglądem, schowkiem, przypinaniem i usuwaniem
+- Zasobnik: w tle, zawsze dostępna
+- Globalne skróty: Ctrl+Alt+I / Ctrl+Alt+Shift+I
+- Lokalne przechowywanie: pliki w folderze shots w katalogu aplikacji; dane na urządzeniu
+- Lekka instalacja: MSIX dla Windows 10/11 Desktop (x64)
+
+
+============================================================
+Wskazówki Partner Center
+============================================================
+
+- Nazwa aplikacji: Yoyo Screenshot / 悠悠截图
+- Wyświetlana nazwa wydawcy: 海边知心人
+- Rodzina urządzeń: zaznacz Windows.Desktop
+- Polityka prywatności: publiczny adres HTTPS z ważnym certyfikatem
+- Logo: pliki PNG w folderze Logos (zalecane: StoreLogo_300x300.png)

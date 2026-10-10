@@ -2,6 +2,8 @@
 #include "MainWnd.h"
 #include "../core/ScreenshotService.h"
 #include "../core/CaptureOverlay.h"
+#include "../platform/Lang.h"
+#include "../platform/SettingsDlg.h"
 #include "../resources/resource.h"
 #include <stdio.h>
 #include <map>
@@ -80,6 +82,7 @@ CMainWnd::CMainWnd()
 	, m_hideOnCapture(true)
 	, m_capturing(false)
 {
+	spy::LoadAppSettings(m_hideOnCapture);
 	for (int i = 0; i < kShotSectionMax; ++i)
 	{
 		m_hShotSectionLabels[i] = NULL;
@@ -99,7 +102,7 @@ CMainWnd::~CMainWnd()
 
 void CMainWnd::Create(int x, int y, int cx, int cy)
 {
-	m_hWindow = XWnd_CreateWindow(x, y, cx, cy, L"悠悠截图", NULL, XC_SY_DEFAULT);
+	m_hWindow = XWnd_CreateWindow(x, y, cx, cy, spy::TrMut(L"AppTitle"), NULL, XC_SY_DEFAULT);
 	if (!m_hWindow)
 	{
 		return;
@@ -126,13 +129,21 @@ void CMainWnd::Create(int x, int y, int cx, int cy)
 		{
 			XWnd_SetIcon(m_hWindow, hSmall, FALSE);
 		}
+		// Also set Win32 icons (packaged MSIX may ignore XCGUI-only icon).
+		HWND hwndIcon = XWnd_GetHWnd(m_hWindow);
+		if (hwndIcon)
+		{
+			if (hBig) SendMessageW(hwndIcon, WM_SETICON, ICON_BIG, (LPARAM)hBig);
+			if (hSmall) SendMessageW(hwndIcon, WM_SETICON, ICON_SMALL, (LPARAM)hSmall);
+		}
 	}
 	XWnd_RegisterMessageProc(m_hWindow, SpyWndProc);
 	BuildUi(cx, cy);
+	ApplyUiLanguage();
 
 	HWND hwnd = XWnd_GetHWnd(m_hWindow);
-	m_tray.Add(hwnd, WM_SPY_TRAY, L"悠悠截图");
-	m_tray.ShowBalloon(L"悠悠截图", L"程序已启动并常驻托盘");
+	m_tray.Add(hwnd, WM_SPY_TRAY, spy::Tr(L"AppTitle"));
+	m_tray.ShowBalloon(spy::Tr(L"TrayBalloonTitle"), spy::Tr(L"TrayBalloonText"));
 	RegisterAppHotkeys();
 	RefreshShotHistory();
 
@@ -148,19 +159,17 @@ void CMainWnd::BuildUi(int cx, int cy)
 	m_toolH = 26;
 	const int statusH = 22;
 
-	BuildMenuBar(cx);
-
-	m_hBtnShot = XBtn_Create(pad, m_toolY, 100, m_toolH, L"开始截图", m_hWindow);
-	m_hBtnShotFull = XBtn_Create(pad + 110, m_toolY, 100, m_toolH, L"全屏截图", m_hWindow);
-	m_hBtnOpenShots = XBtn_Create(pad + 220, m_toolY, 110, m_toolH, L"打开文件夹", m_hWindow);
+	// Structure only — localized strings applied in ApplyUiLanguage().
+	m_hBtnShot = XBtn_Create(pad, m_toolY, 100, m_toolH, L"", m_hWindow);
+	m_hBtnShotFull = XBtn_Create(pad + 110, m_toolY, 100, m_toolH, L"", m_hWindow);
+	m_hBtnOpenShots = XBtn_Create(pad + 220, m_toolY, 110, m_toolH, L"", m_hWindow);
 	XEle_RegisterEvent(m_hBtnShot, XE_BNCLICK, OnShot);
 	XEle_RegisterEvent(m_hBtnShotFull, XE_BNCLICK, OnShotFull);
 	XEle_RegisterEvent(m_hBtnOpenShots, XE_BNCLICK, OnOpenShots);
 
 	BuildShotPanel();
 
-	m_hStatus = XStatic_Create(pad, cy - statusH - 4, cx - pad * 2, statusH,
-		L"快捷键 Ctrl+Alt+I 框选 / Ctrl+Alt+Shift+I 全屏", m_hWindow);
+	m_hStatus = XStatic_Create(pad, cy - statusH - 4, cx - pad * 2, statusH, L"", m_hWindow);
 	XEle_SetBkTransparent(m_hStatus, TRUE);
 
 	RelayoutTools();
@@ -198,23 +207,58 @@ void CMainWnd::RelayoutTools()
 
 void CMainWnd::BuildMenuBar(int cx)
 {
+	if (cx <= 0)
+	{
+		cx = m_clientW > 0 ? m_clientW : 980;
+	}
+	// XMenuBar has no SetItemText — destroy + recreate with current language.
+	if (m_hMenuBar)
+	{
+		XEle_Destroy(m_hMenuBar);
+		m_hMenuBar = NULL;
+	}
 	m_hMenuBar = XMenuBar_Create(0, 0, cx, 26, m_hWindow);
-	XMenuBar_AddButton(m_hMenuBar, L"编辑");
-	XMenuBar_AddButton(m_hMenuBar, L"工具");
-	XMenuBar_AddButton(m_hMenuBar, L"帮助");
+	XMenuBar_AddButton(m_hMenuBar, spy::TrMut(L"MenuEdit"));
+	XMenuBar_AddButton(m_hMenuBar, spy::TrMut(L"MenuTools"));
+	XMenuBar_AddButton(m_hMenuBar, spy::TrMut(L"MenuHelp"));
 
-	XMenuBar_AddMenuItem(m_hMenuBar, 0, kMenuExit, L"退出");
-
-	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuOpenShots, L"打开截图目录");
-	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuStartShot, L"开始截图");
-	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuFullShot, L"全屏截图");
+	XMenuBar_AddMenuItem(m_hMenuBar, 0, kMenuExit, spy::TrMut(L"MenuExit"));
+	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuOpenShots, spy::TrMut(L"MenuOpenShots"));
+	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuStartShot, spy::TrMut(L"MenuStartShot"));
+	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuFullShot, spy::TrMut(L"MenuFullShot"));
 	XMenuBar_AddMenuItem(m_hMenuBar, 1, -1, NULL, XMENU_ROOT, XM_SEPARATOR);
-	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuSettings, L"属性");
-
-	XMenuBar_AddMenuItem(m_hMenuBar, 2, kMenuHelp, L"使用说明");
-	XMenuBar_AddMenuItem(m_hMenuBar, 2, kMenuAbout, L"关于");
+	XMenuBar_AddMenuItem(m_hMenuBar, 1, kMenuSettings, spy::TrMut(L"MenuSettings"));
+	XMenuBar_AddMenuItem(m_hMenuBar, 2, kMenuHelp, spy::TrMut(L"MenuUsage"));
+	XMenuBar_AddMenuItem(m_hMenuBar, 2, kMenuAbout, spy::TrMut(L"MenuAbout"));
 
 	XEle_RegisterEvent(m_hMenuBar, XE_MENUSELECT, SpyOnMenuBarSelect);
+}
+
+void CMainWnd::SetStatusText(const wchar_t* langKey)
+{
+	if (m_hStatus && langKey)
+	{
+		XStatic_SetText(m_hStatus, spy::TrMut(langKey));
+	}
+}
+
+void CMainWnd::ApplyUiLanguage()
+{
+	HWND hwnd = XWnd_GetHWnd(m_hWindow);
+	if (hwnd)
+	{
+		SetWindowTextW(hwnd, spy::Tr(L"AppTitle"));
+	}
+	BuildMenuBar(m_clientW);
+	if (m_hBtnShot) XBtn_SetText(m_hBtnShot, spy::TrMut(L"BtnStartShot"));
+	if (m_hBtnShotFull) XBtn_SetText(m_hBtnShotFull, spy::TrMut(L"BtnFullShot"));
+	if (m_hBtnOpenShots) XBtn_SetText(m_hBtnOpenShots, spy::TrMut(L"BtnOpenFolder"));
+	if (m_hShotTip) XStatic_SetText(m_hShotTip, spy::TrMut(L"ShotTip"));
+	RelayoutShotHistory();
+	if (m_hWindow)
+	{
+		XWnd_RedrawWnd(m_hWindow, TRUE);
+	}
 }
 
 void CMainWnd::OnMenuSelect(int id)
@@ -250,27 +294,16 @@ void CMainWnd::OnMenuSelect(int id)
 void CMainWnd::ShowUsageHelp()
 {
 	HWND hwnd = XWnd_GetHWnd(m_hWindow);
-	MessageBoxW(hwnd,
-		L"悠悠截图\n\n"
-		L"· 框选截图并可画笔/矩形/箭头标注\n"
-		L"· Ctrl+Alt+I 开始框选截图\n"
-		L"· Ctrl+Alt+Shift+I 全屏截图\n"
-		L"· 关闭窗口会最小化到托盘\n"
-		L"· 历史：单击选中 · 双击编辑 · 右键预览/复制/贴图/删除\n"
-		L"· 文件保存在 exe\\shots\\",
-		L"使用说明",
-		MB_OK | MB_ICONINFORMATION);
+	const std::wstring shots = spy::GetShotsDirectory();
+	const std::wstring body = std::wstring(spy::Tr(L"UsageBody")) + shots;
+	MessageBoxW(hwnd, body.c_str(), spy::Tr(L"UsageTitle"), MB_OK | MB_ICONINFORMATION);
 }
 
 void CMainWnd::ShowAbout()
 {
 	HWND hwnd = XWnd_GetHWnd(m_hWindow);
-	MessageBoxW(hwnd,
-		L"悠悠截图\n"
-		L"版本: 1.0.4\n"
-		L"语言: C++",
-		L"关于",
-		MB_OK | MB_ICONINFORMATION);
+	const std::wstring body = std::wstring(spy::Tr(L"AboutBody")) + L"Lang: " + spy::LangCurrentName();
+	MessageBoxW(hwnd, body.c_str(), spy::Tr(L"AboutTitle"), MB_OK | MB_ICONINFORMATION);
 }
 
 void CMainWnd::OpenShotsFolder()
@@ -281,10 +314,10 @@ void CMainWnd::OpenShotsFolder()
 		XWnd_GetHWnd(m_hWindow), L"open", L"explorer.exe", params.c_str(), NULL, SW_SHOWNORMAL);
 	if (ret <= 32)
 	{
-		XStatic_SetText(m_hStatus, L"打开截图文件夹失败");
+		SetStatusText(L"OpenFolderFail");
 		return;
 	}
-	XStatic_SetText(m_hStatus, (wchar_t*)(L"已打开截图文件夹: " + shots).c_str());
+	XStatic_SetText(m_hStatus, (wchar_t*)(std::wstring(spy::Tr(L"OpenFolderOk")) + shots).c_str());
 }
 
 void CMainWnd::RefreshShotHistory()
@@ -292,7 +325,7 @@ void CMainWnd::RefreshShotHistory()
 	SyncShotFileList();
 	UpdateShotPanelVisible(TRUE);
 	RelayoutShotHistory();
-	XStatic_SetText(m_hStatus, L"快捷键 Ctrl+Alt+I 框选 / Ctrl+Alt+Shift+I 全屏 · 历史：单击选中 · 双击编辑 · 右键菜单");
+	SetStatusText(L"StatusHistoryHint");
 	XWnd_RedrawWnd(m_hWindow, TRUE);
 }
 
@@ -430,24 +463,24 @@ void CMainWnd::ExitApp()
 void CMainWnd::ShowSettings()
 {
 	HWND hwnd = XWnd_GetHWnd(m_hWindow);
-	const int r = MessageBoxW(hwnd,
-		L"快捷键设置（当前固定）：\n\n"
-		L"开始截图：Ctrl + Alt + I\n"
-		L"全屏截图：Ctrl + Alt + Shift + I\n\n"
-		L"截图时是否隐藏主窗口到托盘？\n"
-		L"选「是」= 隐藏（推荐）\n"
-		L"选「否」= 不隐藏",
-		L"属性",
-		MB_YESNOCANCEL | MB_ICONINFORMATION);
-	if (r == IDYES)
+	std::wstring langPref = spy::LangGetPreference();
+	const std::wstring oldLang = langPref;
+	if (!spy::ShowSettingsDialog(hwnd, m_hideOnCapture, langPref))
 	{
-		m_hideOnCapture = true;
-		XStatic_SetText(m_hStatus, L"已设置：截图时隐藏主窗口");
+		return;
 	}
-	else if (r == IDNO)
+
+	spy::SaveAppSettings(m_hideOnCapture);
+	if (_wcsicmp(oldLang.c_str(), langPref.c_str()) != 0)
 	{
-		m_hideOnCapture = false;
-		XStatic_SetText(m_hStatus, L"已设置：截图时不隐藏主窗口");
+		spy::LangSetPreference(langPref);
+		ApplyUiLanguage();
+		SetStatusText(L"SettingsLangApplied");
+		m_tray.ShowBalloon(spy::Tr(L"TrayBalloonTitle"), spy::Tr(L"TrayBalloonText"));
+	}
+	else
+	{
+		SetStatusText(m_hideOnCapture ? L"SettingsSavedHideOn" : L"SettingsSavedHideOff");
 	}
 }
 
@@ -473,12 +506,12 @@ void CMainWnd::PopupTrayMenu()
 	POINT pt = {};
 	GetCursorPos(&pt);
 	HMENU menu = CreatePopupMenu();
-	AppendMenuW(menu, MF_STRING, kTrayShow, L"打开窗口");
-	AppendMenuW(menu, MF_STRING, kTrayStartShot, L"开始截图");
-	AppendMenuW(menu, MF_STRING, kTrayFullShot, L"全屏截图");
-	AppendMenuW(menu, MF_STRING, kTraySettings, L"属性");
+	AppendMenuW(menu, MF_STRING, kTrayShow, spy::Tr(L"TrayShow"));
+	AppendMenuW(menu, MF_STRING, kTrayStartShot, spy::Tr(L"TrayStartShot"));
+	AppendMenuW(menu, MF_STRING, kTrayFullShot, spy::Tr(L"TrayFullShot"));
+	AppendMenuW(menu, MF_STRING, kTraySettings, spy::Tr(L"TraySettings"));
 	AppendMenuW(menu, MF_SEPARATOR, 0, NULL);
-	AppendMenuW(menu, MF_STRING, kTrayExit, L"退出");
+	AppendMenuW(menu, MF_STRING, kTrayExit, spy::Tr(L"TrayExit"));
 	SetForegroundWindow(hwnd);
 	TrackPopupMenu(menu, TPM_RIGHTBUTTON | TPM_BOTTOMALIGN, pt.x, pt.y, 0, hwnd, NULL);
 	PostMessageW(hwnd, WM_NULL, 0, 0);
@@ -512,14 +545,14 @@ void CMainWnd::StartRegionCapture()
 	{
 		const bool copied = spy::CopyBmpFileToClipboard(path);
 		std::wstring msg = copied
-			? (L"截图已保存并已复制到剪贴板: " + path)
-			: (L"截图已保存(剪贴板复制失败): " + path);
+			? (std::wstring(spy::Tr(L"SavedClipboard")) + path)
+			: (std::wstring(spy::Tr(L"SavedNoClipboard")) + path);
 		XStatic_SetText(m_hStatus, (wchar_t*)msg.c_str());
 		PushShotHistory(path);
 	}
 	else
 	{
-		XStatic_SetText(m_hStatus, L"已取消截图");
+		SetStatusText(L"CaptureCancelled");
 	}
 }
 
@@ -547,24 +580,21 @@ void CMainWnd::StartFullCapture()
 	{
 		const bool copied = spy::CopyBmpFileToClipboard(path);
 		std::wstring msg = copied
-			? (L"全屏截图已保存并已复制到剪贴板: " + path)
-			: (L"全屏截图已保存(剪贴板复制失败): " + path);
+			? (std::wstring(spy::Tr(L"FullSavedClipboard")) + path)
+			: (std::wstring(spy::Tr(L"FullSavedNoClipboard")) + path);
 		XStatic_SetText(m_hStatus, (wchar_t*)msg.c_str());
 		PushShotHistory(path);
 	}
 	else
 	{
-		XStatic_SetText(m_hStatus, L"全屏截图失败");
+		SetStatusText(L"FullFailed");
 	}
 }
 
 void CMainWnd::BuildShotPanel()
 {
 	const int pad = 10;
-	m_hShotTip = XStatic_Create(pad, m_toolY + 30, 700, 40,
-		L"快捷键：Ctrl+Alt+I 框选截图　|　Ctrl+Alt+Shift+I 全屏截图　|　截图中 Enter 确认 / Esc 取消\n"
-		L"历史：单击选中(红框)　|　双击编辑　|　右键预览/复制/编辑/贴图/删除　|　截图后自动保存并进剪贴板",
-		m_hWindow);
+	m_hShotTip = XStatic_Create(pad, m_toolY + 30, 700, 40, L"", m_hWindow);
 	XEle_SetBkTransparent(m_hShotTip, TRUE);
 	XEle_SetTextColor(m_hShotTip, RGB(80, 80, 80));
 	XStatic_SetTextAlign(m_hShotTip, DT_LEFT | DT_TOP | DT_WORDBREAK);
@@ -771,7 +801,7 @@ void CMainWnd::RelayoutShotHistory()
 	};
 	std::vector<Section> sections;
 	Section recent;
-	recent.title = L"最近";
+	recent.title = spy::Tr(L"Recent");
 	std::map<std::wstring, int> dateSectionPos;
 
 	for (int i = 0; i < (int)m_shotFiles.size() && i < kShotThumbMax; ++i)
@@ -808,7 +838,7 @@ void CMainWnd::RelayoutShotHistory()
 	else if (!m_shotFiles.empty())
 	{
 		Section only;
-		only.title = L"最近";
+		only.title = spy::Tr(L"Recent");
 		only.indices.push_back(0);
 		ordered.push_back(only);
 		for (size_t s = 0; s < sections.size(); ++s)
@@ -947,7 +977,7 @@ void CMainWnd::RemoveShotAt(int index)
 		return;
 	}
 	const std::wstring path = m_shotFiles[index].path;
-	const int ret = MessageBoxW(XWnd_GetHWnd(m_hWindow), L"确定删除这张历史截图吗？", L"删除",
+	const int ret = MessageBoxW(XWnd_GetHWnd(m_hWindow), spy::Tr(L"DeleteConfirm"), spy::Tr(L"DeleteTitle"),
 		MB_YESNO | MB_ICONWARNING);
 	if (ret != IDYES)
 	{
@@ -973,7 +1003,7 @@ void CMainWnd::RemoveShotAt(int index)
 	{
 		const DWORD err = GetLastError();
 		wchar_t msg[128];
-		_snwprintf_s(msg, _countof(msg), L"删除失败（错误码 %lu，文件可能被占用）", (unsigned long)err);
+		_snwprintf_s(msg, _countof(msg), spy::Tr(L"DeleteFail"), (unsigned long)err);
 		XStatic_SetText(m_hStatus, msg);
 		RelayoutShotHistory();
 		return;
@@ -998,7 +1028,7 @@ void CMainWnd::RemoveShotAt(int index)
 	}
 	m_shotCtxIndex = -1;
 	RelayoutShotHistory();
-	XStatic_SetText(m_hStatus, L"已删除截图");
+	SetStatusText(L"Deleted");
 }
 
 void CMainWnd::DeleteShotPath(const std::wstring& path)
@@ -1050,11 +1080,11 @@ void CMainWnd::EditShotPath(const std::wstring& path)
 	{
 		spy::CopyBmpFileToClipboard(outPath);
 		PushShotHistory(outPath);
-		XStatic_SetText(m_hStatus, L"编辑已保存并已复制到剪贴板");
+		SetStatusText(L"EditSaved");
 	}
 	else
 	{
-		XStatic_SetText(m_hStatus, L"已取消编辑");
+		SetStatusText(L"EditCancelled");
 	}
 }
 
@@ -1070,7 +1100,7 @@ void CMainWnd::PreviewShotPath(const std::wstring& path)
 		return;
 	}
 	ShellExecuteW(XWnd_GetHWnd(m_hWindow), L"open", path.c_str(), NULL, NULL, SW_SHOWNORMAL);
-	XStatic_SetText(m_hStatus, L"已打开预览");
+	SetStatusText(L"PreviewOpened");
 }
 
 void CMainWnd::PinShotPath(const std::wstring& path)
@@ -1080,7 +1110,7 @@ void CMainWnd::PinShotPath(const std::wstring& path)
 		return;
 	}
 	spy::ShowPinnedShot(path);
-	XStatic_SetText(m_hStatus, L"已贴图到桌面（拖动可移动，Esc/右键关闭）");
+	SetStatusText(L"Pinned");
 }
 
 void CMainWnd::OnShotThumbClick(HELE hEle)
@@ -1091,7 +1121,7 @@ void CMainWnd::OnShotThumbClick(HELE hEle)
 		return;
 	}
 	SetShotThumbSelected(index);
-	XStatic_SetText(m_hStatus, L"已选中截图（双击编辑，右键更多操作）");
+	SetStatusText(L"Selected");
 }
 
 void CMainWnd::OnShotThumbDblClick(HELE hEle)
@@ -1120,12 +1150,12 @@ void CMainWnd::OnShotThumbRButtonUp(HELE hEle, POINT* pt)
 	GetCursorPos(&screenPt);
 
 	HMENUX hMenu = XMenu_Create();
-	XMenu_AddItem(hMenu, kCtxShotPreview, L"预览");
-	XMenu_AddItem(hMenu, kCtxShotCopy, L"复制");
-	XMenu_AddItem(hMenu, kCtxShotEdit, L"编辑");
-	XMenu_AddItem(hMenu, kCtxShotPin, L"贴图");
+	XMenu_AddItem(hMenu, kCtxShotPreview, spy::TrMut(L"CtxPreview"));
+	XMenu_AddItem(hMenu, kCtxShotCopy, spy::TrMut(L"CtxCopy"));
+	XMenu_AddItem(hMenu, kCtxShotEdit, spy::TrMut(L"CtxEdit"));
+	XMenu_AddItem(hMenu, kCtxShotPin, spy::TrMut(L"CtxPin"));
 	XMenu_AddItem(hMenu, -1, NULL, XMENU_ROOT, XM_SEPARATOR);
-	XMenu_AddItem(hMenu, kCtxShotDelete, L"删除");
+	XMenu_AddItem(hMenu, kCtxShotDelete, spy::TrMut(L"CtxDelete"));
 	XMenu_Popup(hMenu, XEle_GetHWnd(m_hShotScroll), screenPt.x, screenPt.y, m_hShotScroll);
 }
 
@@ -1144,11 +1174,11 @@ void CMainWnd::OnShotContextMenuSelect(int id)
 	case kCtxShotCopy:
 		if (spy::CopyBmpFileToClipboard(path))
 		{
-			XStatic_SetText(m_hStatus, L"已复制到剪贴板");
+			SetStatusText(L"Copied");
 		}
 		else
 		{
-			XStatic_SetText(m_hStatus, L"复制失败");
+			SetStatusText(L"CopyFail");
 		}
 		break;
 	case kCtxShotEdit:

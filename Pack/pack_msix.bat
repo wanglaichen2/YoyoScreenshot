@@ -37,7 +37,7 @@ if not exist "%MSIXTPL%\AppxManifest.xml" (
   exit /b 1
 )
 
-echo [1/5] Sync from Exec ...
+echo [1/6] Sync from Exec ...
 if not exist "%DST%resources" mkdir "%DST%resources"
 copy /Y "%SRC%\YoyoScreenshot.exe" "%DST%" >nul
 if exist "%SRC%\icon.ico" copy /Y "%SRC%\icon.ico" "%DST%" >nul
@@ -47,8 +47,10 @@ if exist "%REPO%\resources\icon.ico" copy /Y "%REPO%\resources\icon.ico" "%DST%r
 for %%F in (libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll libatomic-1.dll libgomp-1.dll libssp-0.dll libXCGUI.dll XCGUI.dll) do (
   if exist "%SRC%\%%F" copy /Y "%SRC%\%%F" "%DST%" >nul
 )
+if exist "%SRC%\Lang" xcopy /E /I /Y /Q "%SRC%\Lang" "%DST%Lang\" >nul
+if exist "%REPO%\Lang" xcopy /E /I /Y /Q "%REPO%\Lang" "%DST%Lang\" >nul
 
-echo [2/5] Build msix_layout ...
+echo [2/6] Build msix_layout ...
 if exist "%LAYOUT%" rmdir /s /q "%LAYOUT%"
 mkdir "%LAYOUT%"
 mkdir "%LAYOUT%\Assets"
@@ -60,19 +62,28 @@ if errorlevel 1 (
   echo [ERROR] Failed to stamp Version=%APP_VER%
   exit /b 1
 )
+echo       Generate localized Start Menu strings ...
+powershell -NoProfile -ExecutionPolicy Bypass -File "%DST%msix\gen_localized_strings.ps1" -OutDir "%LAYOUT%\Strings"
+if errorlevel 1 (
+  echo [ERROR] Failed to generate Strings\*\Resources.resw
+  exit /b 1
+)
 xcopy /Y /Q "%MSIXTPL%\Assets\*" "%LAYOUT%\Assets\" >nul
 copy /Y "%DST%YoyoScreenshot.exe" "%LAYOUT%\" >nul
 if exist "%DST%icon.ico" copy /Y "%DST%icon.ico" "%LAYOUT%\" >nul
 if exist "%DST%resources" xcopy /E /I /Y /Q "%DST%resources" "%LAYOUT%\resources\" >nul
+if exist "%DST%Lang" xcopy /E /I /Y /Q "%DST%Lang" "%LAYOUT%\Lang\" >nul
 for %%F in (libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll libatomic-1.dll libgomp-1.dll libssp-0.dll libXCGUI.dll XCGUI.dll) do (
   if exist "%DST%%%F" copy /Y "%DST%%%F" "%LAYOUT%\" >nul
 )
 
-echo [3/5] Find MakeAppx / SignTool ...
+echo [3/6] Find MakeAppx / MakePri / SignTool ...
 set "MAKEAPPX="
+set "MAKEPRI="
 set "SIGNTOOL="
 for %%V in (10.0.26100.0 10.0.22621.0 10.0.22000.0 10.0.19041.0) do (
   if "!MAKEAPPX!"=="" if exist "%ProgramFiles(x86)%\Windows Kits\10\bin\%%V\x64\MakeAppx.exe" set "MAKEAPPX=%ProgramFiles(x86)%\Windows Kits\10\bin\%%V\x64\MakeAppx.exe"
+  if "!MAKEPRI!"=="" if exist "%ProgramFiles(x86)%\Windows Kits\10\bin\%%V\x64\MakePri.exe" set "MAKEPRI=%ProgramFiles(x86)%\Windows Kits\10\bin\%%V\x64\MakePri.exe"
   if "!SIGNTOOL!"=="" if exist "%ProgramFiles(x86)%\Windows Kits\10\bin\%%V\x64\SignTool.exe" set "SIGNTOOL=%ProgramFiles(x86)%\Windows Kits\10\bin\%%V\x64\SignTool.exe"
 )
 if "%MAKEAPPX%"=="" (
@@ -90,16 +101,36 @@ if "%MAKEAPPX%"=="" (
   exit /b 2
 )
 echo       MAKEAPPX=%MAKEAPPX%
+if not "%MAKEPRI%"=="" echo       MAKEPRI=%MAKEPRI%
 if not "%SIGNTOOL%"=="" echo       SIGNTOOL=%SIGNTOOL%
 
-echo [4/5] MakeAppx pack ...
+echo [4/6] MakePri resources.pri (localized names + unplated icons) ...
+if "%MAKEPRI%"=="" (
+  echo [ERROR] MakePri.exe not found. Localized Start Menu names require MakePri / Windows SDK.
+  exit /b 2
+)
+"%MAKEPRI%" createconfig /cf "%LAYOUT%\priconfig.xml" /dq lang-zh-CN_scale-100_contrast-standard /o >nul
+if errorlevel 1 (
+  echo [ERROR] MakePri createconfig failed.
+  exit /b 2
+)
+"%MAKEPRI%" new /pr "%LAYOUT%" /cf "%LAYOUT%\priconfig.xml" /mn "%LAYOUT%\AppxManifest.xml" /of "%LAYOUT%\resources.pri" /o
+if errorlevel 1 (
+  echo [ERROR] MakePri new failed - cannot build localized DisplayName package.
+  if exist "%LAYOUT%\priconfig.xml" del /f /q "%LAYOUT%\priconfig.xml"
+  exit /b 2
+)
+echo       resources.pri OK
+if exist "%LAYOUT%\priconfig.xml" del /f /q "%LAYOUT%\priconfig.xml"
+
+echo [5/6] MakeAppx pack ...
 "%MAKEAPPX%" pack /d "%LAYOUT%" /p "%MSIX%" /o
 if errorlevel 1 (
   echo [ERROR] MakeAppx failed.
   exit /b 3
 )
 
-echo [5/5] Sign with local test cert ...
+echo [6/6] Sign with local test cert ...
 if "%SIGNTOOL%"=="" (
   echo       SignTool not found - skip sign.
   goto :done
