@@ -36,6 +36,7 @@ SettingsCancel=გაუქმება
 SettingsSavedHideOn=დაყენებულია: ფანჯრის დამალვა გადაღებისას
 SettingsSavedHideOff=დაყენებულია: ფანჯრის შენარჩუნება გადაღებისას
 SettingsLangRestart=ენა შენახულია. მენიუს სრულად გამოსაყენებლად გადატვირთეთ აპლიკაცია.
+SettingsLangApplied=ენა გამოყენებულია
 TrayShow=ფანჯრის გახსნა
 TrayStartShot=გადაღება
 TrayFullShot=სრული ეკრანი

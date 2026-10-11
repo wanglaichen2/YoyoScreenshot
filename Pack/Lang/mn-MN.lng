@@ -36,6 +36,7 @@ SettingsCancel=Цуцлах
 SettingsSavedHideOn=Тохируулсан: авах үед цонхыг нуух
 SettingsSavedHideOff=Тохируулсан: авах үед цонхыг үлдээх
 SettingsLangRestart=Хэл хадгалагдлаа. Цэсийг бүрэн хэрэгжүүлэхийн тулд програмыг дахин эхлүүлнэ үү.
+SettingsLangApplied=Хэл хэрэгжлээ
 TrayShow=Цонх нээх
 TrayStartShot=Авах
 TrayFullShot=Бүтэн дэлгэц

@@ -36,6 +36,7 @@ SettingsCancel=Annulla
 SettingsSavedHideOn=Impostato: nascondi finestra durante la cattura
 SettingsSavedHideOff=Impostato: mantieni finestra durante la cattura
 SettingsLangRestart=Lingua salvata. Riavvia l'app per applicare completamente i menu.
+SettingsLangApplied=Lingua applicata
 TrayShow=Apri finestra
 TrayStartShot=Cattura
 TrayFullShot=Schermo intero

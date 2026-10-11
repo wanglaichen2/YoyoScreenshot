@@ -36,6 +36,7 @@ SettingsCancel=ยกเลิก
 SettingsSavedHideOn=ตั้งค่าแล้ว: ซ่อนหน้าต่างขณะจับภาพ
 SettingsSavedHideOff=ตั้งค่าแล้ว: ไม่ซ่อนหน้าต่างขณะจับภาพ
 SettingsLangRestart=บันทึกภาษาแล้ว กรุณาเริ่มโปรแกรมใหม่เพื่อให้เมนูครบถ้วน
+SettingsLangApplied=ใช้ภาษาแล้ว
 TrayShow=เปิดหน้าต่าง
 TrayStartShot=จับภาพ
 TrayFullShot=เต็มหน้าจอ

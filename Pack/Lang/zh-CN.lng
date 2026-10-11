@@ -36,6 +36,7 @@ SettingsCancel=取消
 SettingsSavedHideOn=已设置：截图时隐藏主窗口
 SettingsSavedHideOff=已设置：截图时不隐藏主窗口
 SettingsLangRestart=语言已保存。请重新启动程序以完整应用菜单文字。
+SettingsLangApplied=语言已应用
 TrayShow=打开窗口
 TrayStartShot=开始截图
 TrayFullShot=全屏截图

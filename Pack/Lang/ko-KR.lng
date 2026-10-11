@@ -36,6 +36,7 @@ SettingsCancel=취소
 SettingsSavedHideOn=설정: 캡처 시 메인 창 숨김
 SettingsSavedHideOff=설정: 캡처 시 메인 창 유지
 SettingsLangRestart=언어가 저장되었습니다. 메뉴를 완전히 적용하려면 앱을 다시 시작하세요.
+SettingsLangApplied=언어가 적용되었습니다
 TrayShow=창 열기
 TrayStartShot=캡처
 TrayFullShot=전체 화면

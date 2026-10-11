@@ -36,6 +36,7 @@ SettingsCancel=Hủy
 SettingsSavedHideOn=Đã đặt: ẩn cửa sổ khi chụp
 SettingsSavedHideOff=Đã đặt: giữ cửa sổ khi chụp
 SettingsLangRestart=Đã lưu ngôn ngữ. Khởi động lại ứng dụng để áp dụng đầy đủ menu.
+SettingsLangApplied=Đã áp dụng ngôn ngữ
 TrayShow=Mở cửa sổ
 TrayStartShot=Chụp
 TrayFullShot=Toàn màn hình

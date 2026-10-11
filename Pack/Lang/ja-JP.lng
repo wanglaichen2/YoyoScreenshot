@@ -36,6 +36,7 @@ SettingsCancel=キャンセル
 SettingsSavedHideOn=設定：切り取り時に隠す
 SettingsSavedHideOff=設定：切り取り時に隠さない
 SettingsLangRestart=言語を保存しました。メニューを完全に反映するには再起動してください。
+SettingsLangApplied=言語を適用しました
 TrayShow=ウィンドウを開く
 TrayStartShot=切り取り
 TrayFullShot=全画面

@@ -36,6 +36,7 @@ SettingsCancel=Annuler
 SettingsSavedHideOn=Réglage : masquer la fenêtre pendant la capture
 SettingsSavedHideOff=Réglage : garder la fenêtre pendant la capture
 SettingsLangRestart=Langue enregistrée. Redémarrez l'application pour appliquer entièrement les menus.
+SettingsLangApplied=Langue appliquée
 TrayShow=Ouvrir la fenêtre
 TrayStartShot=Capturer
 TrayFullShot=Plein écran

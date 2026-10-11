@@ -36,6 +36,7 @@ SettingsCancel=Abbrechen
 SettingsSavedHideOn=Einstellung: Hauptfenster bei Aufnahme ausblenden
 SettingsSavedHideOff=Einstellung: Hauptfenster bei Aufnahme behalten
 SettingsLangRestart=Sprache gespeichert. Bitte neu starten, damit Menüs vollständig übernommen werden.
+SettingsLangApplied=Sprache übernommen
 TrayShow=Fenster öffnen
 TrayStartShot=Aufnahme
 TrayFullShot=Vollbild

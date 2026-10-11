@@ -36,6 +36,7 @@ SettingsCancel=Anuluj
 SettingsSavedHideOn=Ustawiono: ukrywaj okno podczas przechwytywania
 SettingsSavedHideOff=Ustawiono: pozostaw okno podczas przechwytywania
 SettingsLangRestart=Język zapisany. Uruchom ponownie aplikację, aby w pełni zastosować menu.
+SettingsLangApplied=Język zastosowany
 TrayShow=Otwórz okno
 TrayStartShot=Przechwyć
 TrayFullShot=Pełny ekran

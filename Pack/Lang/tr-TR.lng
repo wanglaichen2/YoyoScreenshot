@@ -36,6 +36,7 @@ SettingsCancel=İptal
 SettingsSavedHideOn=Ayar: yakalama sırasında pencereyi gizle
 SettingsSavedHideOff=Ayar: yakalama sırasında pencereyi tut
 SettingsLangRestart=Dil kaydedildi. Menülerin tam uygulanması için uygulamayı yeniden başlatın.
+SettingsLangApplied=Dil uygulandı
 TrayShow=Pencereyi aç
 TrayStartShot=Yakala
 TrayFullShot=Tam ekran

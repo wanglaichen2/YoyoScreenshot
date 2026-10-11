@@ -36,6 +36,7 @@ SettingsCancel=Отмена
 SettingsSavedHideOn=Задано: скрывать окно при съёмке
 SettingsSavedHideOff=Задано: оставлять окно при съёмке
 SettingsLangRestart=Язык сохранён. Перезапустите программу, чтобы полностью применить меню.
+SettingsLangApplied=Язык применён
 TrayShow=Открыть окно
 TrayStartShot=Снимок
 TrayFullShot=Весь экран

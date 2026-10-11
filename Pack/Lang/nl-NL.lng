@@ -36,6 +36,7 @@ SettingsCancel=Annuleren
 SettingsSavedHideOn=Ingesteld: venster verbergen tijdens opname
 SettingsSavedHideOff=Ingesteld: venster behouden tijdens opname
 SettingsLangRestart=Taal opgeslagen. Start de app opnieuw om menu's volledig toe te passen.
+SettingsLangApplied=Taal toegepast
 TrayShow=Venster openen
 TrayStartShot=Opname
 TrayFullShot=Volledig scherm

@@ -36,6 +36,7 @@ SettingsCancel=Anulare
 SettingsSavedHideOn=Setat: ascunde fereastra la captură
 SettingsSavedHideOff=Setat: păstrează fereastra la captură
 SettingsLangRestart=Limba a fost salvată. Reporniți aplicația pentru a aplica meniurile complet.
+SettingsLangApplied=Limba a fost aplicată
 TrayShow=Deschide fereastra
 TrayStartShot=Captură
 TrayFullShot=Ecran complet

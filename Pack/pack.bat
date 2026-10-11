@@ -30,6 +30,8 @@ if exist "%REPO%\resources\icon.ico" copy /Y "%REPO%\resources\icon.ico" "%DST%r
 for %%F in (libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll libatomic-1.dll libgomp-1.dll libssp-0.dll libXCGUI.dll XCGUI.dll) do (
   if exist "%SRC%\%%F" copy /Y "%SRC%\%%F" "%DST%" >nul
 )
+if exist "%SRC%\Lang" xcopy /E /I /Y /Q "%SRC%\Lang" "%DST%Lang\" >nul
+if exist "%REPO%\Lang" xcopy /E /I /Y /Q "%REPO%\Lang" "%DST%Lang\" >nul
 
 echo [2/3] Find ISCC ...
 set "ISCC="

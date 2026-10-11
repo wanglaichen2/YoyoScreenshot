@@ -36,6 +36,7 @@ SettingsCancel=Cancelar
 SettingsSavedHideOn=Definido: ocultar janela ao capturar
 SettingsSavedHideOff=Definido: manter janela ao capturar
 SettingsLangRestart=Idioma salvo. Reinicie o app para aplicar os menus por completo.
+SettingsLangApplied=Idioma aplicado
 TrayShow=Abrir janela
 TrayStartShot=Capturar
 TrayFullShot=Tela cheia

@@ -36,6 +36,7 @@ SettingsCancel=Cancel
 SettingsSavedHideOn=Set: hide main window while capturing
 SettingsSavedHideOff=Set: keep main window while capturing
 SettingsLangRestart=Language saved. Restart the app to apply menus fully.
+SettingsLangApplied=Language applied
 TrayShow=Open window
 TrayStartShot=Capture
 TrayFullShot=Full screen

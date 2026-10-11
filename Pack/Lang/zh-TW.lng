@@ -36,6 +36,7 @@ SettingsCancel=取消
 SettingsSavedHideOn=已設定：截圖時隱藏主視窗
 SettingsSavedHideOff=已設定：截圖時不隱藏主視窗
 SettingsLangRestart=語言已儲存。請重新啟動程式以完整套用選單文字。
+SettingsLangApplied=語言已套用
 TrayShow=開啟視窗
 TrayStartShot=開始截圖
 TrayFullShot=全螢幕截圖
