@@ -1995,8 +1995,7 @@ bool CaptureFullScreenAnnotated(const std::wstring& filePath)
 
 bool RunAnnotateOnImage(const std::wstring& inPath, std::wstring& outPath)
 {
-	HBITMAP loaded = (HBITMAP)LoadImageW(NULL, inPath.c_str(), IMAGE_BITMAP, 0, 0,
-		LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+	HBITMAP loaded = LoadShotAsHBitmap(inPath);
 	if (!loaded)
 	{
 		return false;

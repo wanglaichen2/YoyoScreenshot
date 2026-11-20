@@ -7,12 +7,118 @@
 #include <commdlg.h>
 #include <appmodel.h>
 #include <shlobj.h>
+#include <objbase.h>
+#include <gdiplus.h>
 #include "../platform/Lang.h"
+
+#pragma comment(lib, "gdiplus.lib")
 
 namespace spy
 {
 namespace
 {
+
+struct GdiplusScope
+{
+	ULONG_PTR token;
+	bool ok;
+	GdiplusScope()
+		: token(0)
+		, ok(false)
+	{
+		Gdiplus::GdiplusStartupInput input;
+		ok = (Gdiplus::GdiplusStartup(&token, &input, NULL) == Gdiplus::Ok);
+	}
+	~GdiplusScope()
+	{
+		if (ok)
+			Gdiplus::GdiplusShutdown(token);
+	}
+};
+
+int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
+{
+	UINT num = 0;
+	UINT size = 0;
+	Gdiplus::GetImageEncodersSize(&num, &size);
+	if (size == 0 || num == 0)
+		return -1;
+
+	std::vector<BYTE> buf(size);
+	Gdiplus::ImageCodecInfo* info = reinterpret_cast<Gdiplus::ImageCodecInfo*>(&buf[0]);
+	if (Gdiplus::GetImageEncoders(num, size, info) != Gdiplus::Ok)
+		return -1;
+
+	for (UINT i = 0; i < num; ++i)
+	{
+		if (wcscmp(info[i].MimeType, format) == 0)
+		{
+			*pClsid = info[i].Clsid;
+			return static_cast<int>(i);
+		}
+	}
+	return -1;
+}
+
+bool PathEndsWithI(const std::wstring& path, const wchar_t* ext)
+{
+	const size_t n = path.size();
+	const size_t m = wcslen(ext);
+	if (n < m)
+		return false;
+	return _wcsicmp(path.c_str() + (n - m), ext) == 0;
+}
+
+bool CopyHBitmapToClipboard(HBITMAP hBitmap)
+{
+	BITMAP bmp = {};
+	if (!GetObject(hBitmap, sizeof(bmp), &bmp) || bmp.bmWidth <= 0 || bmp.bmHeight <= 0)
+		return false;
+
+	BITMAPINFOHEADER bi = {};
+	bi.biSize = sizeof(BITMAPINFOHEADER);
+	bi.biWidth = bmp.bmWidth;
+	bi.biHeight = bmp.bmHeight;
+	bi.biPlanes = 1;
+	bi.biBitCount = 24;
+	bi.biCompression = BI_RGB;
+
+	const DWORD stride = ((bmp.bmWidth * 3 + 3) & ~3);
+	const DWORD imageSize = stride * bmp.bmHeight;
+	const DWORD dibBytes = sizeof(BITMAPINFOHEADER) + imageSize;
+
+	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, dibBytes);
+	if (!hMem)
+		return false;
+
+	BYTE* p = static_cast<BYTE*>(GlobalLock(hMem));
+	if (!p)
+	{
+		GlobalFree(hMem);
+		return false;
+	}
+
+	memcpy(p, &bi, sizeof(bi));
+	BITMAPINFO bmi = {};
+	bmi.bmiHeader = bi;
+	HDC hdc = GetDC(NULL);
+	GetDIBits(hdc, hBitmap, 0, (UINT)bmp.bmHeight, p + sizeof(BITMAPINFOHEADER), &bmi, DIB_RGB_COLORS);
+	ReleaseDC(NULL, hdc);
+	GlobalUnlock(hMem);
+
+	if (!OpenClipboard(NULL))
+	{
+		GlobalFree(hMem);
+		return false;
+	}
+	EmptyClipboard();
+	const bool ok = SetClipboardData(CF_DIB, hMem) != NULL;
+	CloseClipboard();
+	if (!ok)
+		GlobalFree(hMem);
+	return ok;
+}
+
 bool IsRunningPackaged()
 {
 	UINT32 length = 0;
@@ -32,6 +138,42 @@ std::wstring GetExeShotsDirectory()
 	return shots;
 }
 
+bool DirHasShotFiles(const std::wstring& shots)
+{
+	WIN32_FIND_DATAW fd = {};
+	const wchar_t* patterns[] = { L"\\*.png", L"\\*.bmp" };
+	for (size_t i = 0; i < _countof(patterns); ++i)
+	{
+		HANDLE h = FindFirstFileW((shots + patterns[i]).c_str(), &fd);
+		if (h != INVALID_HANDLE_VALUE)
+		{
+			FindClose(h);
+			return true;
+		}
+	}
+	return false;
+}
+
+void MigrateShotFiles(const std::wstring& legacy, const std::wstring& shots)
+{
+	WIN32_FIND_DATAW fd = {};
+	const wchar_t* patterns[] = { L"\\*.png", L"\\*.bmp" };
+	for (size_t i = 0; i < _countof(patterns); ++i)
+	{
+		HANDLE hOld = FindFirstFileW((legacy + patterns[i]).c_str(), &fd);
+		if (hOld == INVALID_HANDLE_VALUE)
+			continue;
+		do
+		{
+			if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
+			const std::wstring src = legacy + L"\\" + fd.cFileName;
+			const std::wstring dst = shots + L"\\" + fd.cFileName;
+			MoveFileExW(src.c_str(), dst.c_str(), MOVEFILE_REPLACE_EXISTING);
+		} while (FindNextFileW(hOld, &fd));
+		FindClose(hOld);
+	}
+}
+
 std::wstring GetStoreShotsDirectory()
 {
 	PWSTR docs = nullptr;
@@ -48,70 +190,114 @@ std::wstring GetStoreShotsDirectory()
 	// Migrate from pre-1.0.5 folder name if new dir is empty.
 	// Historical path was Documents\<app>\shots (Unicode escapes; not UI text).
 	const std::wstring legacy = docsRoot + L"\\\u60a0\u60a0\u622a\u56fe\\shots";
-	WIN32_FIND_DATAW fd = {};
-	HANDLE hNew = FindFirstFileW((shots + L"\\*.bmp").c_str(), &fd);
-	const bool newEmpty = (hNew == INVALID_HANDLE_VALUE);
-	if (hNew != INVALID_HANDLE_VALUE) FindClose(hNew);
-	if (newEmpty)
+	if (!DirHasShotFiles(shots))
 	{
-		HANDLE hOld = FindFirstFileW((legacy + L"\\*.bmp").c_str(), &fd);
-		if (hOld != INVALID_HANDLE_VALUE)
-		{
-			do
-			{
-				if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
-				const std::wstring src = legacy + L"\\" + fd.cFileName;
-				const std::wstring dst = shots + L"\\" + fd.cFileName;
-				MoveFileExW(src.c_str(), dst.c_str(), MOVEFILE_REPLACE_EXISTING);
-			} while (FindNextFileW(hOld, &fd));
-			FindClose(hOld);
-		}
+		MigrateShotFiles(legacy, shots);
 	}
 	return shots;
 }
+
+std::wstring TodayDateKey()
+{
+	SYSTEMTIME st = {};
+	GetLocalTime(&st);
+	wchar_t key[32] = {0};
+	_snwprintf_s(key, _countof(key), L"%04u-%02u-%02u",
+		(unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay);
+	return key;
+}
+
+std::wstring DateKeyFromShotPath(const std::wstring& path)
+{
+	const wchar_t* base = wcsrchr(path.c_str(), L'\\');
+	base = base ? base + 1 : path.c_str();
+	// shot_YYYYMMDD_HHMMSS.png / .bmp
+	if (wcsncmp(base, L"shot_", 5) == 0)
+	{
+		unsigned y = 0, mo = 0, d = 0;
+		const wchar_t* p = base + 5;
+		for (int i = 0; i < 4 && *p >= L'0' && *p <= L'9'; ++i, ++p) y = y * 10 + (*p - L'0');
+		for (int i = 0; i < 2 && *p >= L'0' && *p <= L'9'; ++i, ++p) mo = mo * 10 + (*p - L'0');
+		for (int i = 0; i < 2 && *p >= L'0' && *p <= L'9'; ++i, ++p) d = d * 10 + (*p - L'0');
+		if (y >= 2000 && mo >= 1 && mo <= 12 && d >= 1 && d <= 31)
+		{
+			wchar_t key[32] = {0};
+			_snwprintf_s(key, _countof(key), L"%04u-%02u-%02u", y, mo, d);
+			return key;
+		}
+	}
+	WIN32_FILE_ATTRIBUTE_DATA fad = {};
+	if (GetFileAttributesExW(path.c_str(), GetFileExInfoStandard, &fad))
+	{
+		FILETIME local = {};
+		SYSTEMTIME st = {};
+		FileTimeToLocalFileTime(&fad.ftLastWriteTime, &local);
+		FileTimeToSystemTime(&local, &st);
+		wchar_t key[32] = {0};
+		_snwprintf_s(key, _countof(key), L"%04u-%02u-%02u",
+			(unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay);
+		return key;
+	}
+	return L"Unknown date";
+}
+
+void CollectShotPaths(const std::wstring& dir, const wchar_t* pattern, std::vector<std::wstring>& paths)
+{
+	const std::wstring full = dir + L"\\" + pattern;
+	WIN32_FIND_DATAW fd = {};
+	HANDLE h = FindFirstFileW(full.c_str(), &fd);
+	if (h == INVALID_HANDLE_VALUE)
+		return;
+	do
+	{
+		if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+			paths.push_back(dir + L"\\" + fd.cFileName);
+	} while (FindNextFileW(h, &fd));
+	FindClose(h);
+}
+
+} // namespace
+
+HBITMAP LoadShotAsHBitmap(const std::wstring& path)
+{
+	if (PathEndsWithI(path, L".bmp"))
+	{
+		return (HBITMAP)LoadImageW(NULL, path.c_str(), IMAGE_BITMAP, 0, 0,
+			LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+	}
+
+	GdiplusScope gdi;
+	if (!gdi.ok)
+		return NULL;
+
+	Gdiplus::Bitmap fileBmp(path.c_str());
+	if (fileBmp.GetLastStatus() != Gdiplus::Ok)
+		return NULL;
+
+	HBITMAP hbm = NULL;
+	if (fileBmp.GetHBITMAP(Gdiplus::Color(255, 255, 255, 255), &hbm) != Gdiplus::Ok)
+		return NULL;
+	return hbm;
 }
 
 bool SaveHBitmapToBmpFile(HBITMAP hBitmap, const std::wstring& path)
 {
-	BITMAP bmp = {};
-	if (!GetObject(hBitmap, sizeof(bmp), &bmp))
-	{
+	if (!hBitmap || path.empty())
 		return false;
-	}
 
-	BITMAPINFOHEADER bi = {};
-	bi.biSize = sizeof(BITMAPINFOHEADER);
-	bi.biWidth = bmp.bmWidth;
-	bi.biHeight = bmp.bmHeight;
-	bi.biPlanes = 1;
-	bi.biBitCount = 24;
-	bi.biCompression = BI_RGB;
-
-	const DWORD stride = ((bmp.bmWidth * 3 + 3) & ~3);
-	const DWORD imageSize = stride * bmp.bmHeight;
-	std::vector<unsigned char> bits(imageSize);
-
-	HDC hdc = GetDC(NULL);
-	BITMAPINFO bmi = {};
-	bmi.bmiHeader = bi;
-	GetDIBits(hdc, hBitmap, 0, (UINT)bmp.bmHeight, &bits[0], &bmi, DIB_RGB_COLORS);
-	ReleaseDC(NULL, hdc);
-
-	BITMAPFILEHEADER bfh = {};
-	bfh.bfType = 0x4D42;
-	bfh.bfOffBits = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
-	bfh.bfSize = bfh.bfOffBits + imageSize;
-
-	FILE* fp = NULL;
-	if (_wfopen_s(&fp, path.c_str(), L"wb") != 0 || !fp)
-	{
+	GdiplusScope gdi;
+	if (!gdi.ok)
 		return false;
-	}
-	fwrite(&bfh, 1, sizeof(bfh), fp);
-	fwrite(&bi, 1, sizeof(bi), fp);
-	fwrite(&bits[0], 1, imageSize, fp);
-	fclose(fp);
-	return true;
+
+	Gdiplus::Bitmap bmp(hBitmap, NULL);
+	if (bmp.GetLastStatus() != Gdiplus::Ok)
+		return false;
+
+	CLSID pngClsid = {};
+	if (GetEncoderClsid(L"image/png", &pngClsid) < 0)
+		return false;
+
+	return bmp.Save(path.c_str(), &pngClsid, NULL) == Gdiplus::Ok;
 }
 
 std::wstring GetShotsDirectory()
@@ -130,7 +316,7 @@ std::wstring MakeDefaultShotPath()
 	tm t = {};
 	localtime_s(&t, &now);
 	wchar_t path[MAX_PATH] = {0};
-	_snwprintf_s(path, _countof(path), L"%s\\shot_%04d%02d%02d_%02d%02d%02d.bmp",
+	_snwprintf_s(path, _countof(path), L"%s\\shot_%04d%02d%02d_%02d%02d%02d.png",
 		GetShotsDirectory().c_str(),
 		t.tm_year + 1900, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec);
 	return path;
@@ -196,53 +382,6 @@ bool EnumRecentShotFiles(std::vector<std::wstring>& outPaths, int maxCount)
 	return !outPaths.empty();
 }
 
-namespace
-{
-std::wstring TodayDateKey()
-{
-	SYSTEMTIME st = {};
-	GetLocalTime(&st);
-	wchar_t key[32] = {0};
-	_snwprintf_s(key, _countof(key), L"%04u-%02u-%02u",
-		(unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay);
-	return key;
-}
-
-std::wstring DateKeyFromShotPath(const std::wstring& path)
-{
-	const wchar_t* base = wcsrchr(path.c_str(), L'\\');
-	base = base ? base + 1 : path.c_str();
-	// shot_YYYYMMDD_HHMMSS.bmp
-	if (wcsncmp(base, L"shot_", 5) == 0)
-	{
-		unsigned y = 0, mo = 0, d = 0;
-		const wchar_t* p = base + 5;
-		for (int i = 0; i < 4 && *p >= L'0' && *p <= L'9'; ++i, ++p) y = y * 10 + (*p - L'0');
-		for (int i = 0; i < 2 && *p >= L'0' && *p <= L'9'; ++i, ++p) mo = mo * 10 + (*p - L'0');
-		for (int i = 0; i < 2 && *p >= L'0' && *p <= L'9'; ++i, ++p) d = d * 10 + (*p - L'0');
-		if (y >= 2000 && mo >= 1 && mo <= 12 && d >= 1 && d <= 31)
-		{
-			wchar_t key[32] = {0};
-			_snwprintf_s(key, _countof(key), L"%04u-%02u-%02u", y, mo, d);
-			return key;
-		}
-	}
-	WIN32_FILE_ATTRIBUTE_DATA fad = {};
-	if (GetFileAttributesExW(path.c_str(), GetFileExInfoStandard, &fad))
-	{
-		FILETIME local = {};
-		SYSTEMTIME st = {};
-		FileTimeToLocalFileTime(&fad.ftLastWriteTime, &local);
-		FileTimeToSystemTime(&local, &st);
-		wchar_t key[32] = {0};
-		_snwprintf_s(key, _countof(key), L"%04u-%02u-%02u",
-			(unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay);
-		return key;
-	}
-	return L"Unknown date";
-}
-}
-
 bool EnumShotFiles(std::vector<ShotFileInfo>& outFiles, int maxCount)
 {
 	outFiles.clear();
@@ -251,22 +390,9 @@ bool EnumShotFiles(std::vector<ShotFileInfo>& outFiles, int maxCount)
 		return false;
 	}
 	const std::wstring dir = GetShotsDirectory();
-	const std::wstring pattern = dir + L"\\*.bmp";
-	WIN32_FIND_DATAW fd = {};
-	HANDLE h = FindFirstFileW(pattern.c_str(), &fd);
-	if (h == INVALID_HANDLE_VALUE)
-	{
-		return false;
-	}
 	std::vector<std::wstring> paths;
-	do
-	{
-		if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-		{
-			paths.push_back(dir + L"\\" + fd.cFileName);
-		}
-	} while (FindNextFileW(h, &fd));
-	FindClose(h);
+	CollectShotPaths(dir, L"*.png", paths);
+	CollectShotPaths(dir, L"*.bmp", paths); // 兼容旧截图
 
 	std::sort(paths.begin(), paths.end(), [](const std::wstring& a, const std::wstring& b) {
 		return _wcsicmp(a.c_str(), b.c_str()) > 0;
@@ -288,77 +414,27 @@ bool EnumShotFiles(std::vector<ShotFileInfo>& outFiles, int maxCount)
 	return !outFiles.empty();
 }
 
-bool CopyBmpFileToClipboard(const std::wstring& bmpPath)
+bool CopyBmpFileToClipboard(const std::wstring& shotPath)
 {
-	HANDLE hf = CreateFileW(bmpPath.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
-	if (hf == INVALID_HANDLE_VALUE)
-	{
+	HBITMAP hbm = LoadShotAsHBitmap(shotPath);
+	if (!hbm)
 		return false;
-	}
-	const DWORD size = GetFileSize(hf, NULL);
-	if (size < sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER))
-	{
-		CloseHandle(hf);
-		return false;
-	}
-	std::vector<unsigned char> file(size);
-	DWORD read = 0;
-	const BOOL okRead = ReadFile(hf, &file[0], size, &read, NULL);
-	CloseHandle(hf);
-	if (!okRead || read != size)
-	{
-		return false;
-	}
-
-	BITMAPFILEHEADER* bfh = (BITMAPFILEHEADER*)&file[0];
-	if (bfh->bfType != 0x4D42 || bfh->bfOffBits >= size)
-	{
-		return false;
-	}
-	const DWORD dibSize = size - bfh->bfOffBits + sizeof(BITMAPINFOHEADER);
-	// CF_DIB = BITMAPINFOHEADER + bits (no file header)
-	const DWORD dibBytes = size - sizeof(BITMAPFILEHEADER);
-	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, dibBytes);
-	if (!hMem)
-	{
-		return false;
-	}
-	void* p = GlobalLock(hMem);
-	if (!p)
-	{
-		GlobalFree(hMem);
-		return false;
-	}
-	memcpy(p, &file[sizeof(BITMAPFILEHEADER)], dibBytes);
-	GlobalUnlock(hMem);
-
-	if (!OpenClipboard(NULL))
-	{
-		GlobalFree(hMem);
-		return false;
-	}
-	EmptyClipboard();
-	const bool ok = SetClipboardData(CF_DIB, hMem) != NULL;
-	CloseClipboard();
-	if (!ok)
-	{
-		GlobalFree(hMem);
-	}
+	const bool ok = CopyHBitmapToClipboard(hbm);
+	DeleteObject(hbm);
 	return ok;
-	(void)dibSize;
 }
 
 bool SaveShotAsDialog(HWND owner, const std::wstring& srcPath)
 {
-	wchar_t file[MAX_PATH] = L"shot_copy.bmp";
+	wchar_t file[MAX_PATH] = L"shot_copy.png";
 	OPENFILENAMEW ofn = {};
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = owner;
-	ofn.lpstrFilter = L"BMP Image\0*.bmp\0All Files\0*.*\0";
+	ofn.lpstrFilter = L"PNG Image\0*.png\0BMP Image\0*.bmp\0All Files\0*.*\0";
 	ofn.lpstrFile = file;
 	ofn.nMaxFile = MAX_PATH;
 	ofn.Flags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
-	ofn.lpstrDefExt = L"bmp";
+	ofn.lpstrDefExt = L"png";
 	if (!GetSaveFileNameW(&ofn))
 	{
 		return false;
@@ -456,10 +532,9 @@ LRESULT CALLBACK PinShotWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 }
 }
 
-void ShowPinnedShot(const std::wstring& bmpPath)
+void ShowPinnedShot(const std::wstring& shotPath)
 {
-	HBITMAP loaded = (HBITMAP)LoadImageW(NULL, bmpPath.c_str(), IMAGE_BITMAP, 0, 0,
-		LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+	HBITMAP loaded = LoadShotAsHBitmap(shotPath);
 	if (!loaded)
 	{
 		return;
@@ -520,7 +595,6 @@ void ShowPinnedShot(const std::wstring& bmpPath)
 		// 保留原图尺寸窗口；若屏幕放不下则缩小客户区并拉伸绘制
 		st->w = showW;
 		st->h = showH;
-		// 重新做成适应尺寸的位图
 		HDC screen = GetDC(NULL);
 		HDC src = CreateCompatibleDC(screen);
 		HDC dst = CreateCompatibleDC(screen);
